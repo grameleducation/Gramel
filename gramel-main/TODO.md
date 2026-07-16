@@ -1,0 +1,3 @@
+- [ ] Use gramel email for contact form
+- [ ] Add country (code) to student phone number
+- [ ] use gramel email credentials to send signup supabase email
