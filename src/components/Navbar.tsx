@@ -16,6 +16,7 @@ import { useAuthContext } from "@/context/AuthContext";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { RequirePermission } from "./auth/RequirePermission";
 import { UserActions } from "@/lib/permissions/role";
+import client_env from "@/utils/env.client";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -24,6 +25,26 @@ const navLinks = [
   { href: "/assist", label: "Assist" },
   { href: "/contact", label: "Contact Us" },
 ];
+
+// On the assist subdomain, every route except /assist itself belongs to
+// the main site and doesn't exist there -- send those links back to the
+// main domain instead of letting them 404 under assist's rewrite. Detected
+// client-side (not via a server-side host check) so pages using this stay
+// statically prerenderable/cacheable.
+function useMainSiteHref() {
+  const [isAssist, setIsAssist] = useState(false);
+
+  useEffect(() => {
+    setIsAssist(
+      window.location.hostname.includes("assist.grameleducation.com"),
+    );
+  }, []);
+
+  return (path: string) =>
+    isAssist && path !== "/assist"
+      ? `${client_env.NEXT_PUBLIC_BASE_URL}${path}`
+      : path;
+}
 
 // Service links for hover card
 const serviceLinks = [
@@ -43,6 +64,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const { user, isUserLoading, isLoggingOut, handleLogout } = useAuthContext();
+  const toHref = useMainSiteHref();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -56,7 +78,7 @@ export default function Navbar() {
     <nav className={showBorder ? "border-b border-gray-200 bg-white" : ""}>
       <div className="relative mx-auto flex max-w-screen-2xl items-center justify-between px-4 py-5 lg:px-12">
         {/* logo */}
-        <Link href="/" className="" prefetch={false}>
+        <Link href={toHref("/")} className="" prefetch={false}>
           <Image src={logo} alt="Gramel Logo" className="h-8 w-auto lg:h-9" />
         </Link>
 
@@ -83,7 +105,7 @@ export default function Navbar() {
                           <li className="list-inside list-disc" key={slug}>
                             <Link
                               prefetch={false}
-                              href={`/services/${slug}`}
+                              href={toHref(`/services/${slug}`)}
                               className="rounded-lg text-sm text-nowrap text-primary duration-200 hover:underline"
                             >
                               {title}
@@ -93,7 +115,7 @@ export default function Navbar() {
                         <li className="col-span-2 mt-2">
                           <Link
                             prefetch={false}
-                            href="/services"
+                            href={toHref("/services")}
                             className="block rounded-lg bg-primary-300/10 px-3 py-2 text-center text-sm font-semibold text-primary transition-colors duration-200 hover:bg-primary-300 hover:text-white"
                           >
                             All Services
@@ -109,7 +131,7 @@ export default function Navbar() {
               <li key={index}>
                 <Link
                   prefetch={false}
-                  href={link.href}
+                  href={toHref(link.href)}
                   className={`rounded-2xl px-5 py-2 duration-300 ${pathname === link.href ? "bg-primary-300/20" : "hover:bg-primary-300/10"}`}
                 >
                   {link.label}
@@ -135,7 +157,7 @@ export default function Navbar() {
               <DropdownMenuItem asChild>
                 <Link
                   prefetch={false}
-                  href="/login"
+                  href={toHref("/login")}
                   className="rounded-2xl px-6 py-3 font-semibold text-white duration-300 hover:text-primary"
                 >
                   Log In
@@ -144,7 +166,7 @@ export default function Navbar() {
               <DropdownMenuItem asChild>
                 <Link
                   prefetch={false}
-                  href="/signup"
+                  href={toHref("/signup")}
                   className="rounded-2xl px-6 py-3 font-semibold text-white duration-300 hover:text-primary"
                 >
                   Create Account
@@ -161,7 +183,7 @@ export default function Navbar() {
             >
               <Link
                 prefetch={false}
-                href="/student-profile"
+                href={toHref("/student-profile")}
                 className="hidden rounded-2xl border-2 border-primary bg-transparent px-4 py-1.5 text-sm font-semibold text-primary duration-300 hover:border-primary-300 hover:bg-primary-300 hover:text-white md:inline-block lg:px-6 lg:text-base"
               >
                 Profile
@@ -175,7 +197,7 @@ export default function Navbar() {
             >
               <Link
                 prefetch={false}
-                href="/dashboard"
+                href={toHref("/dashboard")}
                 className="hidden rounded-2xl border-2 border-primary bg-transparent px-4 py-1.5 text-sm font-semibold text-primary duration-300 hover:border-primary-300 hover:bg-primary-300 hover:text-white md:inline-block lg:px-6 lg:text-base"
               >
                 Dashboard
@@ -237,7 +259,7 @@ export default function Navbar() {
                 <li key={index}>
                   <Link
                     prefetch={false}
-                    href={link.href}
+                    href={toHref(link.href)}
                     className="block duration-300 hover:text-neutral-300"
                     onClick={toggleMenu}
                   >
@@ -256,10 +278,15 @@ export default function Navbar() {
   );
 }
 
-function MobileScreenLoginDropDown({ toggleMenu }: { toggleMenu: () => void }) {
+function MobileScreenLoginDropDown({
+  toggleMenu,
+}: {
+  toggleMenu: () => void;
+}) {
   const triggerRef = useRef<HTMLButtonElement>(null);
   const [triggerWidth, setTriggerWidth] = useState<number | null>(null);
   const { user, isUserLoading, isLoggingOut, handleLogout } = useAuthContext();
+  const toHref = useMainSiteHref();
 
   // Measure trigger width after layout
   useEffect(() => {
@@ -295,7 +322,7 @@ function MobileScreenLoginDropDown({ toggleMenu }: { toggleMenu: () => void }) {
           <Link
             prefetch={false}
             onClick={toggleMenu}
-            href="/login"
+            href={toHref("/login")}
             className="flex w-full justify-center rounded-2xl px-6 py-3 font-semibold text-white duration-300 hover:text-primary"
           >
             Log In
@@ -305,7 +332,7 @@ function MobileScreenLoginDropDown({ toggleMenu }: { toggleMenu: () => void }) {
           <Link
             prefetch={false}
             onClick={toggleMenu}
-            href="/signup"
+            href={toHref("/signup")}
             className="flex w-full justify-center rounded-2xl px-6 py-3 font-semibold text-white duration-300 hover:text-primary"
           >
             Create Account
@@ -324,7 +351,7 @@ function MobileScreenLoginDropDown({ toggleMenu }: { toggleMenu: () => void }) {
         <Link
           prefetch={false}
           onClick={toggleMenu}
-          href="/student-profile"
+          href={toHref("/student-profile")}
           className="rounded-sm border-2 border-primary bg-transparent px-6 py-1 text-center font-semibold text-primary duration-300 hover:border-primary-300 hover:bg-primary-300 hover:text-white"
         >
           Profile
@@ -339,7 +366,7 @@ function MobileScreenLoginDropDown({ toggleMenu }: { toggleMenu: () => void }) {
         <Link
           prefetch={false}
           onClick={toggleMenu}
-          href="/dashboard"
+          href={toHref("/dashboard")}
           className="rounded-sm border-2 border-primary bg-transparent px-6 py-1 text-center font-semibold text-primary duration-300 hover:border-primary-300 hover:bg-primary-300 hover:text-white"
         >
           Dashboard

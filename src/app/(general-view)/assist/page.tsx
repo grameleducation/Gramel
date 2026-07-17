@@ -1,12 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import gramel_icon from "../../../../public/gramel-icon.png";
+import { headers } from "next/headers";
 import { client } from "@/lib/sanity/client";
 import { isSanityConfigured } from "@/lib/sanity/env";
 import { categoriesQuery, postsQuery } from "@/lib/sanity/queries";
 import { urlForImage } from "@/lib/sanity/image";
 import { knowledgeBase } from "@/data/knowledge-base";
+import client_env from "@/utils/env.client";
 
 export const metadata: Metadata = {
   title: "Assist – Study Abroad Help & Guides",
@@ -38,19 +39,14 @@ export default async function AssistPage({
   searchParams: Promise<{ category?: string }>;
 }) {
   const { category = "" } = await searchParams;
+  const hostname = (await headers()).get("host") || "";
+  const isAssist = hostname.includes("assist.grameleducation.com");
+  const toHref = (path: string) =>
+    isAssist ? `${client_env.NEXT_PUBLIC_BASE_URL}${path}` : path;
 
   if (!isSanityConfigured) {
     return (
       <main className="min-h-screen bg-gradient-to-b from-white to-[#f5f5f5]">
-        <nav className="border-b border-[#e0e0e0] bg-white">
-          <div className="mx-auto max-w-screen-2xl px-6 py-4 md:px-12 xl:px-20">
-            <Link href="/" className="flex items-center gap-2">
-              <Image src={gramel_icon} alt="Gramel" className="h-7 w-auto" />
-              <span className="text-sm font-semibold text-primary">Assist</span>
-            </Link>
-          </div>
-        </nav>
-
         <section className="mx-auto max-w-screen-2xl px-6 py-24 text-center md:px-12 xl:px-20">
           <h1 className="text-4xl font-bold text-primary md:text-5xl">
             Guides for Your Study Abroad Journey
@@ -78,16 +74,6 @@ export default async function AssistPage({
 
   return (
     <main className="min-h-screen bg-white">
-      {/* Navigation */}
-      <nav className="border-b border-[#e0e0e0] bg-white sticky top-0 z-40">
-        <div className="mx-auto max-w-screen-2xl px-6 py-4 md:px-12 xl:px-20">
-          <Link href="/" className="flex items-center gap-2">
-            <Image src={gramel_icon} alt="Gramel" className="h-7 w-auto" />
-            <span className="text-sm font-semibold text-primary">Assist</span>
-          </Link>
-        </div>
-      </nav>
-
       {/* Hero Section */}
       <section className="mx-auto max-w-screen-2xl px-6 py-16 md:px-12 md:py-24 xl:px-20">
         <div className="space-y-4">
@@ -338,13 +324,13 @@ export default async function AssistPage({
           </p>
           <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
             <Link
-              href="/#consultation-form"
+              href={toHref("/#consultation-form")}
               className="rounded-lg bg-primary px-8 py-3 font-medium text-white transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
             >
               Book Consultation
             </Link>
             <Link
-              href="/"
+              href={toHref("/")}
               className="rounded-lg border border-primary px-8 py-3 font-medium text-primary transition-all duration-300 hover:bg-primary hover:text-white"
             >
               Back to Home

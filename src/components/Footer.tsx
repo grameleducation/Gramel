@@ -1,16 +1,34 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import gramel_education_logo from "../../public/gramel-education-logo.png";
 import Link from "next/link";
 import { Twitter } from "@/lib/icons";
+import client_env from "@/utils/env.client";
 
 // TODO: Fill dummy links
 export default function Footer() {
+  // On the assist subdomain, every route here belongs to the main site and
+  // doesn't exist there -- send these links back to the main domain instead
+  // of letting them 404 under assist's rewrite. Detected client-side (not
+  // via a server-side host check) so pages using this stay statically
+  // prerenderable/cacheable.
+  const [isAssist, setIsAssist] = useState(false);
+  useEffect(() => {
+    setIsAssist(
+      window.location.hostname.includes("assist.grameleducation.com"),
+    );
+  }, []);
+  const toHref = (path: string) =>
+    isAssist ? `${client_env.NEXT_PUBLIC_BASE_URL}${path}` : path;
+
   return (
     <footer className="bg-white pt-20 pb-6">
       <div className="mx-auto max-w-screen-2xl px-6 md:px-12 xl:px-20">
         <div className="grid grid-cols-[auto] justify-center gap-y-8 text-center text-neutral-300 sm:grid-cols-2 sm:text-left md:grid-cols-[auto_auto_auto_auto] md:justify-between md:gap-0">
           <div className="space-y-3">
-            <Link prefetch={false} href="/">
+            <Link prefetch={false} href={toHref("/")}>
               <Image src={gramel_education_logo} alt="Gramel Education Logo" />
             </Link>
             <p className="max-w-56 text-sm text-neutral-300">
@@ -23,7 +41,7 @@ export default function Footer() {
             <h5 className="font-semibold text-neutral-500">Gramel Education</h5>
             <li>
               <Link
-                href="/about-us"
+                href={toHref("/about-us")}
                 className="hover:text-neutral-500"
                 prefetch={false}
               >
@@ -32,7 +50,7 @@ export default function Footer() {
             </li>
             <li>
               <Link
-                href="/services"
+                href={toHref("/services")}
                 className="hover:text-neutral-500"
                 prefetch={false}
               >
@@ -50,7 +68,7 @@ export default function Footer() {
             </li>
             <li>
               <Link
-                href="/programs"
+                href={toHref("/programs")}
                 className="hover:text-neutral-500"
                 prefetch={false}
               >
@@ -63,7 +81,7 @@ export default function Footer() {
             <h5 className="font-semibold text-neutral-500">Quick Links</h5>
             <li>
               <Link
-                href="/programs"
+                href={toHref("/programs")}
                 className="hover:text-neutral-500"
                 prefetch={false}
               >
@@ -81,7 +99,7 @@ export default function Footer() {
             </li>
             <li>
               <Link
-                href="/student-profile"
+                href={toHref("/student-profile")}
                 className="hover:text-neutral-500"
                 prefetch={false}
               >
@@ -112,7 +130,7 @@ export default function Footer() {
             </li>
             <li>
               <Link
-                href="/services"
+                href={toHref("/services")}
                 className="hover:text-neutral-500"
                 prefetch={false}
               >
