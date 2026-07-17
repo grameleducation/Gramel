@@ -2,6 +2,26 @@ import { type NextRequest, NextResponse } from "next/server";
 import { getSessionCookie } from "better-auth/cookies";
 
 export async function proxy(request: NextRequest) {
+  const hostname = request.headers.get("host") || "";
+  const pathname = request.nextUrl.pathname;
+
+  // Handle assist subdomain: rewrite to /assist routes
+  if (hostname.includes("assist.grameleducation.com")) {
+    if (pathname === "/" || pathname === "") {
+      return NextResponse.rewrite(new URL("/assist", request.url));
+    }
+    if (pathname.startsWith("/assist") || pathname.startsWith("/editor")) {
+      return NextResponse.next({ request });
+    }
+    // For other paths on assist subdomain, rewrite to /assist equivalent
+    if (!pathname.startsWith("/api") && !pathname.startsWith("/_next")) {
+      return NextResponse.rewrite(
+        new URL(`/assist${pathname}`, request.url)
+      );
+    }
+    return NextResponse.next({ request });
+  }
+
   // Optimistically redirect users.
   // Not fully secure but fast. Additional auth checks in each page/route
   const sessionCookie = getSessionCookie(request);
@@ -13,7 +33,7 @@ export async function proxy(request: NextRequest) {
     "/forgot-password",
     "/update-password",
   ];
-  if (sessionCookie && restrictedAuthPages.includes(request.nextUrl.pathname)) {
+  if (sessionCookie && restrictedAuthPages.includes(pathname)) {
     const url = new URL("/", request.url);
     const redirectResponse = NextResponse.redirect(url); // redirect to home page
     // Copy all cookies request to the redirect response
@@ -27,9 +47,8 @@ export async function proxy(request: NextRequest) {
   // (including nonexistent/mistyped URLs) falls through to Next.js, which
   // renders the real 404 page instead of a misleading login redirect.
   const protectedPrefixes = ["/dashboard", "/student-profile", "/programs"];
-  const path = request.nextUrl.pathname;
   const isProtected = protectedPrefixes.some(
-    (p) => path === p || path.startsWith(`${p}/`),
+    (p) => pathname === p || pathname.startsWith(`${p}/`),
   );
   if (!sessionCookie && isProtected) {
     const url = new URL("/login", request.url);
