@@ -2,29 +2,10 @@ import { type NextRequest, NextResponse } from "next/server";
 import { getSessionCookie } from "better-auth/cookies";
 
 export async function proxy(request: NextRequest) {
-  const hostname = request.headers.get("host") || "";
-  const pathname = request.nextUrl.pathname;
-
-  // Handle assist subdomain: rewrite to /assist routes
-  if (hostname.includes("assist.grameleducation.com")) {
-    if (pathname === "/" || pathname === "") {
-      return NextResponse.rewrite(new URL("/assist", request.url));
-    }
-    if (pathname.startsWith("/assist") || pathname.startsWith("/editor")) {
-      return NextResponse.next({ request });
-    }
-    // For other paths on assist subdomain, rewrite to /assist equivalent
-    if (!pathname.startsWith("/api") && !pathname.startsWith("/_next")) {
-      return NextResponse.rewrite(
-        new URL(`/assist${pathname}`, request.url)
-      );
-    }
-    return NextResponse.next({ request });
-  }
-
   // Optimistically redirect users.
   // Not fully secure but fast. Additional auth checks in each page/route
   const sessionCookie = getSessionCookie(request);
+  const pathname = request.nextUrl.pathname;
 
   // Already logged-in users should not be able to access these pages
   const restrictedAuthPages = [

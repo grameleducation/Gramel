@@ -1,6 +1,11 @@
 {
   "rewrites": [
     {
+      "source": "/",
+      "has": [{ "type": "host", "value": "assist.grameleducation.com" }],
+      "destination": "/assist"
+    },
+    {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "assist.grameleducation.com" }],
       "destination": "/assist/:path*"
