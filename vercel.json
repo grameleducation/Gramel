@@ -6,9 +6,9 @@
       "destination": "/assist"
     },
     {
-      "source": "/:path*",
+      "source": "/:path((?!api|_next|.*\\..*|editor).*)",
       "has": [{ "type": "host", "value": "assist.grameleducation.com" }],
-      "destination": "/assist/:path*"
+      "destination": "/assist/:path"
     }
   ]
 }

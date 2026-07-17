@@ -110,7 +110,7 @@ export default async function AssistPage({
           <div className="mx-auto max-w-screen-2xl px-6 py-8 md:px-12 xl:px-20">
             <div className="flex flex-wrap gap-3">
               <Link
-                href="/assist"
+                href="."
                 className={`rounded-full px-6 py-2.5 text-sm font-medium transition-all duration-300 ${
                   category === ""
                     ? "bg-primary text-white shadow-md"
@@ -154,7 +154,7 @@ export default async function AssistPage({
             {/* Featured Article */}
             {featuredPost && (
               <Link
-                href={`/assist/${featuredPost.slug}`}
+                href={`${featuredPost.slug}`}
                 className="group block"
                 prefetch={false}
               >
@@ -220,7 +220,7 @@ export default async function AssistPage({
                   {otherPosts.map((post) => (
                     <Link
                       key={post._id}
-                      href={`/assist/${post.slug}`}
+                      href={`${post.slug}`}
                       className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
                       prefetch={false}
                     >
