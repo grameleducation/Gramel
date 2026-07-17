@@ -7,7 +7,7 @@ import { schemaTypes } from "./sanity/schemaTypes";
 import { apiVersion, dataset, projectId } from "./src/lib/sanity/env";
 
 export default defineConfig({
-  basePath: "/studio",
+  basePath: "/editor",
   projectId: projectId || "placeholder",
   dataset,
   schema: { types: schemaTypes },

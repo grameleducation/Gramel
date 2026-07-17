@@ -8,9 +8,9 @@ import { categoriesQuery, postsQuery } from "@/lib/sanity/queries";
 import { urlForImage } from "@/lib/sanity/image";
 
 export const metadata: Metadata = {
-  title: "Assist – Study Abroad Guides",
+  title: "Assist – Study Abroad Help & Guides",
   description:
-    "Guides and answers on visas, scholarships, housing, and the international education process from Gramel Education, a study abroad agency in Abuja, Nigeria.",
+    "Comprehensive guides on visas, scholarships, housing, and the international education process from Gramel Education, a leading study abroad agency in Abuja, Nigeria.",
 };
 
 export const revalidate = 60;
@@ -40,14 +40,27 @@ export default async function AssistPage({
 
   if (!isSanityConfigured) {
     return (
-      <main className="pt-14">
+      <main className="min-h-screen bg-gradient-to-b from-white to-[#f5f5f5]">
+        <nav className="border-b border-[#e0e0e0] bg-white">
+          <div className="mx-auto max-w-screen-2xl px-6 py-4 md:px-12 xl:px-20">
+            <Link href="/" className="flex items-center gap-2">
+              <Image src={gramel_icon} alt="Gramel" className="h-7 w-auto" />
+              <span className="text-sm font-semibold text-primary">Assist</span>
+            </Link>
+          </div>
+        </nav>
+
         <section className="mx-auto max-w-screen-2xl px-6 py-24 text-center md:px-12 xl:px-20">
-          <h1 className="text-3xl font-bold text-primary md:text-5xl">
-            Assist
+          <h1 className="text-4xl font-bold text-primary md:text-5xl">
+            Guides for Your Study Abroad Journey
           </h1>
-          <p className="mx-auto mt-4 max-w-xl text-neutral-300">
-            Guides and articles are on the way. This section is not
-            connected to a content source yet.
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-neutral-300">
+            Comprehensive answers on visas, scholarships, housing, and the
+            international education process.
+          </p>
+          <p className="mx-auto mt-8 text-neutral-300">
+            Check back soon for guides and resources from the Gramel Education
+            team.
           </p>
         </section>
       </main>
@@ -59,95 +72,222 @@ export default async function AssistPage({
     client.fetch<PostSummary[]>(postsQuery, { category }),
   ]);
 
+  const featuredPost = posts[0];
+  const otherPosts = posts.slice(1);
+
   return (
-    <main className="pt-14">
-      <section className="mx-auto max-w-screen-2xl px-6 py-16 md:px-12 xl:px-20">
-        <div className="mx-auto flex max-w-max items-center gap-3">
-          <Image src={gramel_icon} alt="Gramel Icon" className="h-6" />
-          <p className="text-lg leading-normal text-primary-300">ASSIST</p>
+    <main className="min-h-screen bg-white">
+      {/* Navigation */}
+      <nav className="border-b border-[#e0e0e0] bg-white sticky top-0 z-40">
+        <div className="mx-auto max-w-screen-2xl px-6 py-4 md:px-12 xl:px-20">
+          <Link href="/" className="flex items-center gap-2">
+            <Image src={gramel_icon} alt="Gramel" className="h-7 w-auto" />
+            <span className="text-sm font-semibold text-primary">Assist</span>
+          </Link>
         </div>
+      </nav>
 
-        <div className="mt-4 space-y-6">
-          <h1 className="mx-auto max-w-2xl text-center text-4xl leading-tight font-bold text-primary lg:text-5xl">
-            Guides for Your Study Abroad Journey
+      {/* Hero Section */}
+      <section className="mx-auto max-w-screen-2xl px-6 py-16 md:px-12 md:py-24 xl:px-20">
+        <div className="space-y-4">
+          <p className="text-sm font-semibold text-primary-300 uppercase tracking-wide">
+            Help & Guides
+          </p>
+          <h1 className="text-4xl font-bold text-primary md:text-5xl lg:text-6xl">
+            Your Study Abroad Resource Center
           </h1>
-          <p className="mx-auto max-w-[58rem] text-center text-neutral-300 lg:text-lg">
-            Answers on visas, scholarships, housing, and the international
-            education process, from the Gramel Education team.
+          <p className="max-w-2xl text-lg text-neutral-300">
+            Expert guidance on visas, scholarships, housing, career planning,
+            and every step of your international education journey.
           </p>
         </div>
+      </section>
 
-        {categories.length > 0 && (
-          <div className="mt-12 flex flex-nowrap justify-center gap-4 overflow-x-auto border-b border-[#626060] py-4">
-            <Link
-              href="/assist"
-              className={`rounded-2xl px-6 py-3 text-nowrap duration-300 md:text-lg ${
-                category === ""
-                  ? "bg-primary-300 text-white"
-                  : "text-[#1e1e1e] hover:bg-primary-300/70 hover:text-white"
-              }`}
-              prefetch={false}
-            >
-              All
-            </Link>
-            {categories.map((c) => (
+      {/* Category Navigation */}
+      {categories.length > 0 && (
+        <section className="border-b border-[#e0e0e0] bg-[#f9f9f9]">
+          <div className="mx-auto max-w-screen-2xl px-6 py-8 md:px-12 xl:px-20">
+            <div className="flex flex-wrap gap-3">
               <Link
-                key={c._id}
-                href={`/assist?category=${c.slug}`}
-                className={`rounded-2xl px-6 py-3 text-nowrap duration-300 md:text-lg ${
-                  category === c.slug
-                    ? "bg-primary-300 text-white"
-                    : "text-[#1e1e1e] hover:bg-primary-300/70 hover:text-white"
+                href="/assist"
+                className={`rounded-full px-6 py-2.5 text-sm font-medium transition-all duration-300 ${
+                  category === ""
+                    ? "bg-primary text-white shadow-md"
+                    : "bg-white text-[#1e1e1e] border border-[#e0e0e0] hover:border-primary hover:text-primary"
                 }`}
-                prefetch={false}
               >
-                {c.title}
+                All Articles
               </Link>
-            ))}
+              {categories.map((c) => (
+                <Link
+                  key={c._id}
+                  href={`/assist?category=${c.slug}`}
+                  className={`rounded-full px-6 py-2.5 text-sm font-medium transition-all duration-300 ${
+                    category === c.slug
+                      ? "bg-primary text-white shadow-md"
+                      : "bg-white text-[#1e1e1e] border border-[#e0e0e0] hover:border-primary hover:text-primary"
+                  }`}
+                  prefetch={false}
+                >
+                  {c.title}
+                </Link>
+              ))}
+            </div>
           </div>
-        )}
+        </section>
+      )}
 
+      {/* Content Section */}
+      <section className="mx-auto max-w-screen-2xl px-6 py-16 md:px-12 md:py-24 xl:px-20">
         {posts.length === 0 ? (
-          <p className="mt-16 text-center text-neutral-300">
-            No articles published yet. Check back soon.
-          </p>
+          <div className="rounded-3xl border-2 border-dashed border-[#e0e0e0] bg-[#f9f9f9] py-16 text-center">
+            <p className="text-lg text-neutral-300">
+              No articles published in this category yet.
+            </p>
+            <p className="mt-2 text-sm text-neutral-300">
+              Check back soon for new guides and resources.
+            </p>
+          </div>
         ) : (
-          <div className="mt-16 grid items-stretch gap-10 md:grid-cols-2 md:gap-5 lg:grid-cols-3">
-            {posts.map((post) => (
+          <div className="space-y-16">
+            {/* Featured Article */}
+            {featuredPost && (
               <Link
-                key={post._id}
-                href={`/assist/${post.slug}`}
-                className="group flex h-full flex-col rounded-3xl transition-shadow duration-300 hover:shadow-xl"
+                href={`/assist/${featuredPost.slug}`}
+                className="group block"
                 prefetch={false}
               >
-                <div className="relative aspect-[414/280] w-full overflow-hidden rounded-t-3xl">
-                  <Image
-                    src={urlForImage(post.coverImage as never)
-                      .width(828)
-                      .height(560)
-                      .url()}
-                    alt={post.title}
-                    fill
-                    unoptimized
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-                <div className="grow space-y-3 rounded-b-3xl border border-t-0 border-[#8F8F923D] p-6">
-                  {post.category && (
-                    <p className="text-sm font-semibold text-primary-300">
-                      {post.category.title}
-                    </p>
-                  )}
-                  <p className="text-lg font-semibold text-primary md:text-xl">
-                    {post.title}
-                  </p>
-                  <p className="text-neutral-300">{post.excerpt}</p>
+                <div className="overflow-hidden rounded-3xl bg-white shadow-lg transition-shadow duration-300 hover:shadow-2xl">
+                  <div className="grid gap-8 md:grid-cols-2">
+                    <div className="relative aspect-video overflow-hidden md:aspect-auto md:h-96">
+                      <Image
+                        src={urlForImage(featuredPost.coverImage as never)
+                          .width(800)
+                          .height(600)
+                          .url()}
+                        alt={featuredPost.title}
+                        fill
+                        unoptimized
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                    <div className="flex flex-col justify-center space-y-6 p-8 md:p-10">
+                      {featuredPost.category && (
+                        <div className="inline-flex w-fit">
+                          <span className="rounded-full bg-primary-300/10 px-4 py-2 text-sm font-semibold text-primary-300">
+                            {featuredPost.category.title}
+                          </span>
+                        </div>
+                      )}
+                      <h2 className="text-3xl font-bold text-primary transition-colors duration-300 group-hover:text-primary-300 md:text-4xl">
+                        {featuredPost.title}
+                      </h2>
+                      <p className="text-lg text-neutral-300">
+                        {featuredPost.excerpt}
+                      </p>
+                      <div className="pt-4">
+                        <span className="inline-flex items-center gap-2 text-primary-300 font-medium">
+                          Read Article
+                          <svg
+                            className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M9 5l7 7-7 7"
+                            />
+                          </svg>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </Link>
-            ))}
+            )}
+
+            {/* Other Articles Grid */}
+            {otherPosts.length > 0 && (
+              <div>
+                <h3 className="mb-8 text-2xl font-bold text-primary">
+                  Latest Articles
+                </h3>
+                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                  {otherPosts.map((post) => (
+                    <Link
+                      key={post._id}
+                      href={`/assist/${post.slug}`}
+                      className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+                      prefetch={false}
+                    >
+                      <div className="relative aspect-video overflow-hidden">
+                        <Image
+                          src={urlForImage(post.coverImage as never)
+                            .width(600)
+                            .height(400)
+                            .url()}
+                          alt={post.title}
+                          fill
+                          unoptimized
+                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                      </div>
+                      <div className="flex grow flex-col space-y-4 p-6">
+                        {post.category && (
+                          <span className="inline-flex w-fit rounded-full bg-primary-300/10 px-3 py-1 text-xs font-semibold text-primary-300">
+                            {post.category.title}
+                          </span>
+                        )}
+                        <h4 className="text-lg font-semibold text-primary transition-colors duration-300 group-hover:text-primary-300">
+                          {post.title}
+                        </h4>
+                        <p className="grow text-sm text-neutral-300">
+                          {post.excerpt}
+                        </p>
+                        <div className="pt-2">
+                          <span className="text-xs font-medium text-primary-300">
+                            →
+                          </span>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         )}
+      </section>
+
+      {/* Footer CTA */}
+      <section className="border-t border-[#e0e0e0] bg-[#f9f9f9]">
+        <div className="mx-auto max-w-screen-2xl px-6 py-16 text-center md:px-12 md:py-20 xl:px-20">
+          <h3 className="text-2xl font-bold text-primary md:text-3xl">
+            Looking for more support?
+          </h3>
+          <p className="mx-auto mt-4 max-w-xl text-neutral-300">
+            Can't find what you need? Connect with our team for personalized
+            guidance.
+          </p>
+          <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+            <Link
+              href="/#consultation-form"
+              className="rounded-lg bg-primary px-8 py-3 font-medium text-white transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
+            >
+              Book Consultation
+            </Link>
+            <Link
+              href="/"
+              className="rounded-lg border border-primary px-8 py-3 font-medium text-primary transition-all duration-300 hover:bg-primary hover:text-white"
+            >
+              Back to Home
+            </Link>
+          </div>
+        </div>
       </section>
     </main>
   );
