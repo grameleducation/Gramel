@@ -96,7 +96,7 @@ export default async function StudentDetailsPage({
   if (sessionError) redirect("/");
   if (!result?.user) redirect("/login");
 
-  const user = result.user;
+  const user = result.user as typeof result.user & { role: string };
   // Check user permission
   if (
     !isUserRole(user.role) ||

@@ -8,7 +8,6 @@ import { hasPermission } from "@/lib/permissions/utils";
 
 // This endpoint gets all staffs and admin
 export async function GET(request: Request) {
-  const userRole = (session.user as any).role || "student";
   const [session, sessionError] = await tryCatch(async () =>
     auth.api.getSession({ headers: request.headers }),
   );
@@ -19,10 +18,11 @@ export async function GET(request: Request) {
         success: false,
         error: "You must be logged in to access this resource",
       },
-  const userRole = (session.user as any).role || "student";
       { status: 401 },
     );
   }
+
+  const userRole = (session.user as any).role || "student";
 
   if (
     !isUserRole(userRole) ||

@@ -27,7 +27,7 @@ export async function sendContactPageMessageAction(
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body: new URLSearchParams({
-        secret: server_env.HCAPTCHA_SECRET_KEY,
+        secret: server_env.HCAPTCHA_SECRET_KEY!,
         response: captchaToken,
       }),
     });

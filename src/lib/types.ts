@@ -10,3 +10,13 @@ export interface ClientUser {
   profile_picture_url?: Nullable<string>;
   role: UserRoles;
 }
+
+// better-auth's additionalFields (role, first_name, middle_name, last_name,
+// profile_picture_url) aren't reflected in the base session/user type
+// returned by auth.api.getSession(), so callers intersect with this.
+export interface SessionUserFields {
+  role: string;
+  first_name?: Nullable<string>;
+  middle_name?: Nullable<string>;
+  last_name?: Nullable<string>;
+}

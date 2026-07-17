@@ -1,22 +1,33 @@
 import { z } from "zod";
 
+// Optional: the assist subdomain's Vercel project shares this codebase but
+// doesn't set these (no auth/captcha/ApplyBoard iframe there), so we fall
+// back to safe defaults instead of failing the build.
 const envSchema = z.object({
   // base url
-  NEXT_PUBLIC_BASE_URL: z.string().url(),
+  NEXT_PUBLIC_BASE_URL: z.string().url().optional(),
   // hcaptcha
-  NEXT_PUBLIC_HCAPTCHA_SITE_KEY: z.string().trim().min(1),
+  NEXT_PUBLIC_HCAPTCHA_SITE_KEY: z.string().trim().min(1).optional(),
   // applyboard
-  NEXT_PUBLIC_APPLYBOARD_PARTNER_ID: z.string().trim().min(1),
+  NEXT_PUBLIC_APPLYBOARD_PARTNER_ID: z.string().trim().min(1).optional(),
 });
 
 function validateEnv() {
   try {
-    return envSchema.parse({
+    const parsed = envSchema.parse({
       NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
       NEXT_PUBLIC_HCAPTCHA_SITE_KEY: process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY,
       NEXT_PUBLIC_APPLYBOARD_PARTNER_ID:
         process.env.NEXT_PUBLIC_APPLYBOARD_PARTNER_ID,
     });
+
+    return {
+      NEXT_PUBLIC_BASE_URL:
+        parsed.NEXT_PUBLIC_BASE_URL || "https://grameleducation.com",
+      NEXT_PUBLIC_HCAPTCHA_SITE_KEY: parsed.NEXT_PUBLIC_HCAPTCHA_SITE_KEY || "",
+      NEXT_PUBLIC_APPLYBOARD_PARTNER_ID:
+        parsed.NEXT_PUBLIC_APPLYBOARD_PARTNER_ID || "",
+    };
   } catch (error) {
     if (error instanceof z.ZodError) {
       const missingVars = error.errors

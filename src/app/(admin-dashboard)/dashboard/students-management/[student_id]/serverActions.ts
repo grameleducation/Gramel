@@ -16,6 +16,7 @@ import { after } from "next/server";
 import transporter from "@/utils/emailTransporter";
 import { offlinePaymentEntryCreated } from "@/lib/emailTemplates";
 import server_env from "@/utils/env.server";
+import { SessionUserFields } from "@/lib/types";
 
 type CreateOfflinePaymentResponse =
   | { success: true }
@@ -93,7 +94,7 @@ export async function createOfflinePaymentEntry(params: {
       return { success: false, error: "You must be logged in." };
     }
 
-    const actingUser = session.user;
+    const actingUser = session.user as typeof session.user & SessionUserFields;
 
     // Check user permission
     if (
@@ -316,7 +317,7 @@ export async function createOfflinePaymentEntry(params: {
             await Promise.all(
               admins.map((admin) =>
                 transporter.sendMail({
-                  from: server_env.SMTP_USER,
+                  from: server_env.SMTP_USER!,
                   to: admin.email,
                   subject: offlinePaymentEntryCreated.subject,
                   text: offlinePaymentEntryCreated.text(emailParams),

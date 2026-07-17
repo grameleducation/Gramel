@@ -5,6 +5,7 @@ import { auth } from "@/utils/better-auth/auth";
 import pool from "@/utils/db";
 import tryCatch from "@/utils/tryCatch";
 import { headers } from "next/headers";
+import { SessionUserFields } from "@/lib/types";
 
 interface AssignStudentToStaffParams {
   studentId: string;
@@ -52,7 +53,7 @@ export async function assignStudentToStaffAction({
     };
   }
 
-  const actingUser = session.user;
+  const actingUser = session.user as typeof session.user & SessionUserFields;
 
   if (actingUser.role !== UserRoles.admin) {
     return {
@@ -231,7 +232,7 @@ export async function changeStudentToStaffAction(studentId: string): Promise<{
     };
   }
 
-  const actingUser = session.user;
+  const actingUser = session.user as typeof session.user & SessionUserFields;
   if (actingUser.role !== UserRoles.admin) {
     return {
       success: false,

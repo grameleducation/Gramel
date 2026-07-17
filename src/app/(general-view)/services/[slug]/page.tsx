@@ -3,6 +3,7 @@ import Image from "next/image";
 import PaymentSection from "./PaymentSection";
 import { servicesDetails } from "./servicesData";
 import pool from "@/utils/db";
+import tryCatch from "@/utils/tryCatch";
 import type { ServiceDetail } from "./types";
 
 export const revalidate = 3600; // revalidate once in one hour
@@ -17,15 +18,21 @@ async function getServiceDetailsWithCurrentPrices(
   const service = servicesDetails[serviceSlug];
   if (!service) return null;
 
-  const pricesRes = await pool.query<{
-    option_name: string | null;
-    price_kobo: number;
-  }>(
-    `SELECT option_name, price_kobo
+  // Falls back to null (→ notFound()) instead of throwing when the database
+  // is unreachable, so environments without DATABASE_URL (e.g. the assist
+  // subdomain's build, which never serves this route) don't fail the build.
+  const [pricesRes, queryError] = await tryCatch(() =>
+    pool.query<{
+      option_name: string | null;
+      price_kobo: number;
+    }>(
+      `SELECT option_name, price_kobo
      FROM public.service_prices
      WHERE service_slug = $1`,
-    [serviceSlug],
+      [serviceSlug],
+    ),
   );
+  if (queryError) return null;
 
   const pricesByOption = new Map<string | null, number>();
   for (const row of pricesRes.rows) {

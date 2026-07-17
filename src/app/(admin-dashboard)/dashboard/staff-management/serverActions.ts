@@ -5,6 +5,7 @@ import { auth } from "@/utils/better-auth/auth";
 import pool from "@/utils/db";
 import tryCatch from "@/utils/tryCatch";
 import { headers } from "next/headers";
+import { SessionUserFields } from "@/lib/types";
 
 interface BasicUser {
   id: string;
@@ -64,7 +65,7 @@ export async function revertStaffToStudentAction({
       };
     }
 
-    const actingUser = session.user;
+    const actingUser = session.user as typeof session.user & SessionUserFields;
 
     if (actingUser.role !== UserRoles.admin) {
       return {

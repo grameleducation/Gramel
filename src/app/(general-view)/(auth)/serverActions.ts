@@ -47,7 +47,7 @@ export async function signupAction(
         first_name,
         last_name,
         callbackURL: "/student-profile?new_user=true",
-      },
+      } as any,
     });
 
     revalidatePath("/");
@@ -102,6 +102,7 @@ export async function loginAction(
     });
 
     revalidatePath("/");
+    const userRole = (result.user as any).role;
     if (!isUserRole(userRole)) {
       return {
         success: false,

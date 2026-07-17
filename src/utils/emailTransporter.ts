@@ -5,12 +5,12 @@ import server_env from "./env.server";
 
 // Create transporter once
 const transporter: Transporter = nodemailer.createTransport({
-  host: server_env.SMTP_HOST,
-  port: server_env.SMTP_PORT,
+  host: server_env.SMTP_HOST!,
+  port: server_env.SMTP_PORT!,
   secure: true,
   auth: {
-    user: server_env.SMTP_USER,
-    pass: server_env.SMTP_PASSWORD,
+    user: server_env.SMTP_USER!,
+    pass: server_env.SMTP_PASSWORD!,
   },
 });
 

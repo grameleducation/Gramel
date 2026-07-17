@@ -21,7 +21,6 @@ const querySchema = z.object({
 
 // This endpoint gets list of staffs. Also filter staffs with provided parameters
 export async function GET(request: NextRequest) {
-  const userRole = (session.user as any).role || "student";
   const [session, sessionError] = await tryCatch(async () =>
     auth.api.getSession({ headers: request.headers }),
   );
@@ -32,10 +31,11 @@ export async function GET(request: NextRequest) {
         success: false,
         error: "You must be logged in to access this resource",
       },
-  const userRole = (session.user as any).role || "student";
       { status: 401 },
     );
   }
+
+  const userRole = (session.user as any).role || "student";
 
   if (
     !isUserRole(userRole) ||

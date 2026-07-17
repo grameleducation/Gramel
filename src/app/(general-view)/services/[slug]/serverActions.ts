@@ -12,6 +12,7 @@ import pool from "@/utils/db";
 import { Database } from "@/utils/supabase/types";
 import { normalize } from "@/utils/normalize";
 import { getServicePriceKobo } from "@/lib/getServicePrice";
+import { SessionUserFields } from "@/lib/types";
 
 // Create testNameSchema for language-proficiency-tests
 const languageTestNames = (
@@ -59,7 +60,7 @@ export async function initializePayment(
         error: "Authentication required. Please log in to continue.",
       };
     }
-    const user = session.user;
+    const user = session.user as typeof session.user & SessionUserFields;
 
     if (!user.email) {
       return {
@@ -188,7 +189,7 @@ export async function initializePayment(
       {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${server_env.PAYSTACK_SECRET_KEY}`,
+          Authorization: `Bearer ${server_env.PAYSTACK_SECRET_KEY!}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(transactionData),
@@ -267,7 +268,7 @@ export async function verifyTransaction(
       `https://api.paystack.co/transaction/verify/${reference}`,
       {
         headers: {
-          Authorization: `Bearer ${server_env.PAYSTACK_SECRET_KEY}`,
+          Authorization: `Bearer ${server_env.PAYSTACK_SECRET_KEY!}`,
         },
       },
     );

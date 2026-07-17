@@ -43,7 +43,7 @@ export default async function ProfilePage({
   if (sessionError) redirect("/");
   if (!result?.user) redirect("/login");
 
-  const user = result.user;
+  const user = result.user as typeof result.user & { role: string };
   // Ensure the user is a student
   if (user.role !== UserRoles.student) redirect("/");
 

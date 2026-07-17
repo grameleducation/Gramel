@@ -10,7 +10,7 @@ export async function isValidHCaptcha(token: string): Promise<boolean> {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body: new URLSearchParams({
-        secret: server_env.HCAPTCHA_SECRET_KEY,
+        secret: server_env.HCAPTCHA_SECRET_KEY!,
         response: token,
       }),
     });

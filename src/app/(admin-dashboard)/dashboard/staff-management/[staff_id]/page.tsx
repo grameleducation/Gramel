@@ -37,7 +37,7 @@ export default async function SingleStaffPage({
   if (sessionError) redirect("/");
   if (!result?.user) redirect("/login");
 
-  const currentUserData = result.user;
+  const currentUserData = result.user as typeof result.user & { role: string };
   // Fetch staff data
   const [staffData, error] = await tryCatch(() => fetchStaffData(staff_id));
   if (error) redirect("/");

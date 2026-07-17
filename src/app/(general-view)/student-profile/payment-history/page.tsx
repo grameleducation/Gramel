@@ -17,12 +17,13 @@ export type Payment = {
 };
 
 export default async function PaymentHistoryPage() {
-  const userRole = (session.user as any).role || "student";
   const [session, sessionError] = await tryCatch(async () =>
     auth.api.getSession({ headers: await headers() }),
   );
   if (sessionError) redirect("/");
   if (!session?.user) redirect("/login");
+
+  const userRole = (session.user as any).role || "student";
 
   // Ensure the user is a student
   if (userRole !== UserRoles.student) redirect("/");

@@ -99,9 +99,9 @@ export async function updateStudentProfile(
 
 // Cloudinary config
 cloudinary.config({
-  cloud_name: server_env.CLOUDINARY_CLOUD_NAME,
-  api_key: server_env.CLOUDINARY_API_KEY,
-  api_secret: server_env.CLOUDINARY_API_SECRET,
+  cloud_name: server_env.CLOUDINARY_CLOUD_NAME!,
+  api_key: server_env.CLOUDINARY_API_KEY!,
+  api_secret: server_env.CLOUDINARY_API_SECRET!,
   secure: process.env.NODE_ENV === "production",
 });
 
@@ -180,7 +180,7 @@ export async function getCloudinaryUploadSignature({
     // Generate signature
     const signature = cloudinary.utils.api_sign_request(
       paramsToSign,
-      server_env.CLOUDINARY_API_SECRET,
+      server_env.CLOUDINARY_API_SECRET!,
     );
 
     // Return all necessary params for upload
@@ -190,8 +190,8 @@ export async function getCloudinaryUploadSignature({
       ...("public_id" in paramsToSign && { public_id: paramsToSign.public_id }),
       timestamp: paramsToSign.timestamp,
       upload_preset: paramsToSign.upload_preset,
-      api_key: server_env.CLOUDINARY_API_KEY,
-      cloud_name: server_env.CLOUDINARY_CLOUD_NAME,
+      api_key: server_env.CLOUDINARY_API_KEY!,
+      cloud_name: server_env.CLOUDINARY_CLOUD_NAME!,
       display_name: paramsToSign.display_name,
       allowed_formats: paramsToSign.allowed_formats,
       invalidate: paramsToSign.invalidate,

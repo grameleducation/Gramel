@@ -8,7 +8,6 @@ import { hasPermission } from "@/lib/permissions/utils";
 
 // This endpoint get the stats for admin dashboard
 export async function GET(request: Request) {
-  const userRole = (session.user as any).role || "student";
   const [session, sessionError] = await tryCatch(async () =>
     auth.api.getSession({ headers: request.headers }),
   );

@@ -39,7 +39,7 @@ const options = {
       // Use waitUntil to send email to ensure email is sent before the serverless function is terminated
       waitUntil(
         transporter.sendMail({
-          from: server_env.SMTP_USER,
+          from: server_env.SMTP_USER!,
           to: data.user.email,
           subject: "Reset Your Password",
           text: forgotPassword.text({ resetLink: data.url }),
@@ -58,7 +58,7 @@ const options = {
       // Use waitUntil to send email to ensure email is sent before the serverless function is terminated
       waitUntil(
         transporter.sendMail({
-          from: server_env.SMTP_USER,
+          from: server_env.SMTP_USER!,
           to: data.user.email,
           subject: "Verify Your Account",
           text: signupVerification.text({ confirmLink: data.url }),
@@ -76,8 +76,8 @@ const options = {
   socialProviders: {
     google: {
       prompt: "select_account",
-      clientId: server_env.GOOGLE_CLIENT_ID,
-      clientSecret: server_env.GOOGLE_CLIENT_SECRET,
+      clientId: server_env.GOOGLE_CLIENT_ID!,
+      clientSecret: server_env.GOOGLE_CLIENT_SECRET!,
       mapProfileToUser(profile) {
         const first_name = profile.given_name
           ? startCase(profile.given_name)
