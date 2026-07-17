@@ -2,10 +2,33 @@ import { type NextRequest, NextResponse } from "next/server";
 import { getSessionCookie } from "better-auth/cookies";
 
 export async function proxy(request: NextRequest) {
+  const hostname = request.headers.get("host") || "";
+  const pathname = request.nextUrl.pathname;
+
+  // The assist subdomain serves /assist as its own site. This must run in
+  // middleware rather than a vercel.json rewrite: "/" is statically
+  // prerendered, and Vercel's edge resolves the exact static asset for "/"
+  // before evaluating vercel.json rewrites for that same path, so a
+  // config-level rewrite of "/" never actually fires. Middleware runs
+  // inside the Next.js request pipeline before that static lookup, so it
+  // takes effect correctly.
+  if (hostname.includes("assist.grameleducation.com")) {
+    if (pathname === "/") {
+      return NextResponse.rewrite(new URL("/assist", request.url));
+    }
+    if (
+      !pathname.startsWith("/assist") &&
+      !pathname.startsWith("/editor") &&
+      !pathname.startsWith("/api")
+    ) {
+      return NextResponse.rewrite(new URL(`/assist${pathname}`, request.url));
+    }
+    return NextResponse.next({ request });
+  }
+
   // Optimistically redirect users.
   // Not fully secure but fast. Additional auth checks in each page/route
   const sessionCookie = getSessionCookie(request);
-  const pathname = request.nextUrl.pathname;
 
   // Already logged-in users should not be able to access these pages
   const restrictedAuthPages = [
