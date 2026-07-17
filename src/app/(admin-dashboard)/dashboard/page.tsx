@@ -39,9 +39,10 @@ export default async function Dashboard() {
   if (!result?.user) redirect("/login");
 
   // Ensure the user is an admin or staff
+  const userRole = (result.user as any).role || "student";
   if (
-    !isUserRole(result.user.role) ||
-    !hasPermission(result.user.role, UserActions.view_admin_dashboard)
+    !isUserRole(userRole) ||
+    !hasPermission(userRole, UserActions.view_admin_dashboard)
   ) {
     redirect("/");
   }
