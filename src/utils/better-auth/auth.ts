@@ -21,6 +21,10 @@ const options = {
   appName: "Gramel Education",
   trustedOrigins: ["http://localhost:3000", client_env.NEXT_PUBLIC_BASE_URL],
   baseURL: client_env.NEXT_PUBLIC_BASE_URL, // Optional. Default to env variable BETTER_AUTH_URL
+  // Falls back to a placeholder on builds without BETTER_AUTH_SECRET (e.g.
+  // the assist subdomain's Vercel project, which never handles real auth
+  // traffic) so better-auth doesn't log its default-secret warning.
+  secret: server_env.BETTER_AUTH_SECRET || "assist-build-placeholder-secret",
   database: pool,
   emailAndPassword: {
     enabled: true,
