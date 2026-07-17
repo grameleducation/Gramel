@@ -3,28 +3,28 @@ import "server-only";
 import { z } from "zod";
 
 const envSchema = z.object({
-  // Database
-  DATABASE_URL: z.string().trim().min(1),
-  // hcaptcha
-  HCAPTCHA_SECRET_KEY: z.string().trim().min(1),
-  // paystack
-  PAYSTACK_SECRET_KEY: z.string().trim().min(1),
-  // cloudinary
-  CLOUDINARY_CLOUD_NAME: z.string().trim().min(1),
-  CLOUDINARY_API_KEY: z.string().trim().min(1),
-  CLOUDINARY_API_SECRET: z.string().trim().min(1),
-  // smtp
-  SMTP_HOST: z.string().trim().min(1),
-  SMTP_PORT: z.coerce.number().min(1),
-  SMTP_USER: z.string().trim().min(1),
-  SMTP_PASSWORD: z.string().trim().min(1),
+  // Database (optional for assist subdomain which only serves static content)
+  DATABASE_URL: z.string().trim().min(1).optional(),
+  // hcaptcha (optional - assist doesn't have contact forms)
+  HCAPTCHA_SECRET_KEY: z.string().trim().min(1).optional(),
+  // paystack (optional - assist has no payments)
+  PAYSTACK_SECRET_KEY: z.string().trim().min(1).optional(),
+  // cloudinary (optional - assist uses existing image URLs)
+  CLOUDINARY_CLOUD_NAME: z.string().trim().min(1).optional(),
+  CLOUDINARY_API_KEY: z.string().trim().min(1).optional(),
+  CLOUDINARY_API_SECRET: z.string().trim().min(1).optional(),
+  // smtp (optional - assist has no email sending)
+  SMTP_HOST: z.string().trim().min(1).optional(),
+  SMTP_PORT: z.coerce.number().min(1).optional(),
+  SMTP_USER: z.string().trim().min(1).optional(),
+  SMTP_PASSWORD: z.string().trim().min(1).optional(),
 
-  // oauth
-  GOOGLE_CLIENT_ID: z.string().trim().min(1),
-  GOOGLE_CLIENT_SECRET: z.string().trim().min(1),
+  // oauth (optional - assist has no auth)
+  GOOGLE_CLIENT_ID: z.string().trim().min(1).optional(),
+  GOOGLE_CLIENT_SECRET: z.string().trim().min(1).optional(),
 
-  // better-auth
-  BETTER_AUTH_SECRET: z.string().trim().min(1),
+  // better-auth (optional - assist has no auth)
+  BETTER_AUTH_SECRET: z.string().trim().min(1).optional(),
 });
 
 function validateEnv() {
