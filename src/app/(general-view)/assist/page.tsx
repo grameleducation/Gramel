@@ -6,6 +6,7 @@ import { client } from "@/lib/sanity/client";
 import { isSanityConfigured } from "@/lib/sanity/env";
 import { categoriesQuery, postsQuery } from "@/lib/sanity/queries";
 import { urlForImage } from "@/lib/sanity/image";
+import { knowledgeBase } from "@/data/knowledge-base";
 
 export const metadata: Metadata = {
   title: "Assist – Study Abroad Help & Guides",
@@ -261,6 +262,68 @@ export default async function AssistPage({
             )}
           </div>
         )}
+      </section>
+
+      {/* Knowledge Base */}
+      <section className="mx-auto max-w-screen-2xl px-6 py-16 md:px-12 md:py-24 xl:px-20">
+        <div className="space-y-4 mb-16">
+          <p className="text-sm font-semibold text-primary-300 uppercase tracking-wide">
+            Quick Answers
+          </p>
+          <h2 className="text-4xl font-bold text-primary md:text-5xl">
+            Knowledge Base
+          </h2>
+          <p className="max-w-2xl text-lg text-neutral-300">
+            Find answers to common questions about studying abroad. Browse by
+            topic or search for specific information.
+          </p>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {knowledgeBase.map((category) => (
+            <div
+              key={category.id}
+              className="rounded-2xl border border-[#e0e0e0] bg-white p-8 hover:shadow-lg transition-shadow duration-300"
+            >
+              <div className="mb-6">
+                <div className="text-4xl mb-3">{category.icon}</div>
+                <h3 className="text-2xl font-bold text-primary">
+                  {category.title}
+                </h3>
+                <p className="mt-2 text-sm text-neutral-300">
+                  {category.description}
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                {category.faqs.map((faq) => (
+                  <details
+                    key={faq.id}
+                    className="group cursor-pointer border-t border-[#e0e0e0] pt-4 first:border-t-0 first:pt-0"
+                  >
+                    <summary className="flex items-start gap-3 font-medium text-primary hover:text-primary-300 transition-colors">
+                      <span className="mt-1 flex-shrink-0">
+                        <span className="block group-open:hidden">+</span>
+                        <span className="hidden group-open:block">−</span>
+                      </span>
+                      <span className="text-sm">{faq.question}</span>
+                    </summary>
+                    <p className="mt-3 ml-6 text-sm text-neutral-300 leading-relaxed">
+                      {faq.answer}
+                    </p>
+                  </details>
+                ))}
+              </div>
+
+              <Link
+                href={`/assist?category=${category.id}`}
+                className="mt-6 inline-block text-sm font-medium text-primary-300 hover:text-primary transition-colors"
+              >
+                View more on blog →
+              </Link>
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* Footer CTA */}
