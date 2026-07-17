@@ -22,10 +22,11 @@ export async function updateServicePriceAction(params: {
   if (sessionError || !session?.user) {
     return { success: false, error: "You must be logged in." };
   }
+  const userRole = (session.user as any).role || "student";
 
   if (
-    !isUserRole(session.user.role) ||
-    !hasPermission(session.user.role, UserActions.update_services_price)
+    !isUserRole(userRole) ||
+    !hasPermission(userRole, UserActions.update_services_price)
   ) {
     return {
       success: false,

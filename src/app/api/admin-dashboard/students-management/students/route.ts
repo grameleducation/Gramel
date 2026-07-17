@@ -32,6 +32,7 @@ const staffManagementSchema = baseQuerySchema.extend({
 
 // Endpoint for students listing in staff-management and students-management views.
 export async function GET(request: NextRequest) {
+  const userRole = (session.user as any).role || "student";
   const [session, sessionError] = await tryCatch(async () =>
     auth.api.getSession({ headers: request.headers }),
   );
@@ -42,6 +43,7 @@ export async function GET(request: NextRequest) {
         success: false,
         error: "You must be logged in to access this resource",
       },
+  const userRole = (session.user as any).role || "student";
       { status: 401 },
     );
   }
@@ -68,14 +70,14 @@ export async function GET(request: NextRequest) {
     .safeParse(commonQuery);
 
   if (
-    !isUserRole(session.user.role) ||
+    !isUserRole(userRole) ||
     (source === "staff-management"
       ? !hasPermission(
-          session.user.role,
+          userRole,
           UserActions.view_admin_staff_management,
         )
       : !hasPermission(
-          session.user.role,
+          userRole,
           UserActions.view_admin_student_management,
         ))
   ) {

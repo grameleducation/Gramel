@@ -13,6 +13,7 @@ const querySchema = z.object({
 
 // This endpoint gets the total number of students assigned to a staff
 export async function GET(request: NextRequest) {
+  const userRole = (session.user as any).role || "student";
   const [session, sessionError] = await tryCatch(async () =>
     auth.api.getSession({ headers: request.headers }),
   );
@@ -23,13 +24,14 @@ export async function GET(request: NextRequest) {
         success: false,
         error: "You must be logged in to access this resource",
       },
+  const userRole = (session.user as any).role || "student";
       { status: 401 },
     );
   }
 
   if (
-    !isUserRole(session.user.role) ||
-    !hasPermission(session.user.role, UserActions.view_admin_staff_management)
+    !isUserRole(userRole) ||
+    !hasPermission(userRole, UserActions.view_admin_staff_management)
   ) {
     return NextResponse.json(
       {
