@@ -102,7 +102,7 @@ export async function loginAction(
     });
 
     revalidatePath("/");
-    if (!isUserRole(result.user.role)) {
+    if (!isUserRole(userRole)) {
       return {
         success: false,
         message: "Invalid user role. Please contact support.",
@@ -111,7 +111,7 @@ export async function loginAction(
 
     return {
       success: true,
-      user: { ...result.user, role: result.user.role },
+      user: { ...result.user, role: userRole },
     };
   } catch (error) {
     if (error instanceof Error) {

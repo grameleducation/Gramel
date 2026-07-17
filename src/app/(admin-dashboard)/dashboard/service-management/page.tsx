@@ -145,9 +145,11 @@ export default async function ServiceManagementPage() {
   if (error) redirect("/");
   if (!result?.user) redirect("/login");
 
+  const userRole = (result.user as any).role || "student";
+
   if (
-    !isUserRole(result.user.role) ||
-    !hasPermission(result.user.role, UserActions.view_admin_dashboard)
+    !isUserRole(userRole) ||
+    !hasPermission(userRole, UserActions.view_admin_dashboard)
   ) {
     redirect("/");
   }

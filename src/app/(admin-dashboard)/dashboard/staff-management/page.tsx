@@ -14,10 +14,12 @@ export default async function StaffManagementPage() {
   if (error) redirect("/");
   if (!result?.user) redirect("/login");
 
+  const userRole = (result.user as any).role || "student";
+
   // Ensure the user is an admin
   if (
-    !isUserRole(result.user.role) ||
-    !hasPermission(result.user.role, UserActions.view_admin_staff_management)
+    !isUserRole(userRole) ||
+    !hasPermission(userRole, UserActions.view_admin_staff_management)
   ) {
     redirect("/");
   }

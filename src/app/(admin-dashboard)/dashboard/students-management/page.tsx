@@ -14,10 +14,12 @@ export default async function StudentsManagementPage() {
   if (sessionError) redirect("/");
   if (!result?.user) redirect("/login");
 
+  const userRole = (result.user as any).role || "student";
+
   // Ensure the user is an admin or staff
   if (
-    !isUserRole(result.user.role) ||
-    !hasPermission(result.user.role, UserActions.view_admin_student_management)
+    !isUserRole(userRole) ||
+    !hasPermission(userRole, UserActions.view_admin_student_management)
   ) {
     redirect("/");
   }
@@ -27,7 +29,7 @@ export default async function StudentsManagementPage() {
       <StudentsManagementView
         user={{
           id: result.user.id,
-          user_role: result.user.role as UserRoles,
+          user_role: userRole as UserRoles,
         }}
       />
     </main>
