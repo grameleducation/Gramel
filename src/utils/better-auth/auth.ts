@@ -194,7 +194,13 @@ export const auth = betterAuth({
   plugins: [
     ...options.plugins,
     customSession(async ({ user, session }) => {
-      return { user, session };
+      return {
+        user: {
+          ...user,
+          role: (user as any).role || "student",
+        },
+        session,
+      };
     }, options),
     nextCookies(),
   ],
