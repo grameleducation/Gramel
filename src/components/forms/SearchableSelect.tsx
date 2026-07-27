@@ -4,24 +4,35 @@ type SearchableSelectProps = {
   options: string[];
   placeholder?: string;
   onSelect?: (value: string) => void;
+  name?: string;
+  id?: string;
+  defaultValue?: string;
 };
 
 export default function SearchableSelect({
   options,
   placeholder = "Select an option...",
+  name,
+  id,
+  defaultValue,
 }: SearchableSelectProps) {
+  const listId = id ? `${id}-options` : "searchable-options";
+
   return (
     <div className="relative w-full text-black">
       <input
         type="text"
-        list="searchable-options"
+        id={id}
+        name={name}
+        list={listId}
+        defaultValue={defaultValue}
         placeholder={placeholder}
         className="peer w-full rounded-[0.625rem] border border-black px-4 py-3 transition duration-300 hover:border-primary-300 focus:border-primary-300 focus:ring-2 focus:ring-primary-300 focus:outline-none"
       />
       <ChevronDown className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 duration-150 peer-hover:pointer-events-none peer-hover:opacity-0 peer-focus:pointer-events-none peer-focus:opacity-0" />
 
       {/* Datalist options */}
-      <datalist id="searchable-options">
+      <datalist id={listId}>
         {options.map((option) => (
           <option key={option} value={option} />
         ))}

@@ -1,45 +1,160 @@
 import { ChevronDown } from "lucide-react";
 import ProgramCard from "@/components/ProgramCard";
-import ProgramsFilterForm from "@/components/forms/ProgramsFilterForm";
+import ProgramsFilterForm, {
+  ProgramsFilterOptions,
+  ProgramsFilterValues,
+} from "@/components/forms/ProgramsFilterForm";
+import pool from "@/utils/db";
+import tryCatch from "@/utils/tryCatch";
 
-const programs = [
-  {
-    image:
-      "https://res.cloudinary.com/dqeqlgygu/image/upload/v1754939752/gramel/public/programs-school-image_yv0drx.jpg",
-    university: "University Name This is a Long Name",
-    programType: "Postgraduate Diploma",
-    programTitle: "Post-Baccalaureate Diploma - Law Enforcement Studies",
-    location: "Ontario, Canada",
-    campusCity: "Windsor, Canada",
-    tuition: "$13,640 CAD",
-    applicationFee: "$125 CAD",
-    duration: "24 months (2 years)",
-    intakes: [
-      { date: "Sept 2026", rate: "Very High" },
-      { date: "Jan 2027", rate: "High" },
-      { date: "May 2027", rate: "Very High" },
-    ],
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dqeqlgygu/image/upload/v1754939752/gramel/public/programs-school-image_yv0drx.jpg",
-    university: "Another University Name",
-    programType: "Masters",
-    programTitle: "MSc Computer Science",
-    location: "Alberta, Canada",
-    campusCity: "Calgary, Canada",
-    tuition: "$18,000 CAD",
-    applicationFee: "$150 CAD",
-    duration: "12 months (1 year)",
-    intakes: [
-      { date: "Sept 2026", rate: "High" },
-      { date: "Jan 2027", rate: "Medium" },
-      { date: "May 2027", rate: "High" },
-    ],
-  },
-];
+const RESULTS_LIMIT = 20;
 
-export default async function ProgramsPage() {
+interface ProgramRow {
+  id: number;
+  university: string;
+  institution_type: string;
+  country: string;
+  campus_city: string;
+  program_type: string;
+  program_title: string;
+  field_of_study: string;
+  tuition_amount: string;
+  tuition_currency: string;
+  application_fee_amount: string;
+  application_fee_currency: string;
+  duration_months: number;
+  image_url: string;
+  intakes: { date: string; rate: string }[];
+  total_count: string;
+}
+
+interface FilterOptionsRow {
+  countries: string[] | null;
+  institution_types: string[] | null;
+  universities: string[] | null;
+  program_types: string[] | null;
+  fields_of_study: string[] | null;
+}
+
+const CURRENCY_SYMBOLS: Record<string, string> = {
+  CAD: "$",
+  USD: "$",
+  AUD: "$",
+  GBP: "£",
+  EUR: "€",
+};
+
+function formatMoney(amount: string, currency: string) {
+  const symbol = CURRENCY_SYMBOLS[currency] ?? "";
+  const value = Math.round(Number(amount)).toLocaleString();
+  return `${symbol}${value} ${currency}`;
+}
+
+function formatDuration(months: number) {
+  if (months % 12 === 0) {
+    const years = months / 12;
+    return `${months} months (${years} year${years > 1 ? "s" : ""})`;
+  }
+  return `${months} months`;
+}
+
+async function fetchFilterOptions(): Promise<ProgramsFilterOptions> {
+  const [result, error] = await tryCatch(() =>
+    pool.query<FilterOptionsRow>(`
+      SELECT
+        (SELECT array_agg(DISTINCT country ORDER BY country) FROM public.programs) AS countries,
+        (SELECT array_agg(DISTINCT institution_type ORDER BY institution_type) FROM public.programs) AS institution_types,
+        (SELECT array_agg(DISTINCT university ORDER BY university) FROM public.programs) AS universities,
+        (SELECT array_agg(DISTINCT program_type ORDER BY program_type) FROM public.programs) AS program_types,
+        (SELECT array_agg(DISTINCT field_of_study ORDER BY field_of_study) FROM public.programs) AS fields_of_study
+    `),
+  );
+
+  if (error || !result.rows[0]) {
+    return {
+      countries: [],
+      institutionTypes: [],
+      universities: [],
+      programTypes: [],
+      fieldsOfStudy: [],
+    };
+  }
+
+  const row = result.rows[0];
+  return {
+    countries: row.countries ?? [],
+    institutionTypes: row.institution_types ?? [],
+    universities: row.universities ?? [],
+    programTypes: row.program_types ?? [],
+    fieldsOfStudy: row.fields_of_study ?? [],
+  };
+}
+
+async function fetchPrograms(filters: ProgramsFilterValues) {
+  const whereConditions: string[] = [];
+  const queryParams: string[] = [];
+  let paramIndex = 1;
+
+  const filterColumns: [keyof ProgramsFilterValues, string][] = [
+    ["country", "country"],
+    ["institution_type", "institution_type"],
+    ["university", "university"],
+    ["program_type", "program_type"],
+    ["field_of_study", "field_of_study"],
+  ];
+
+  for (const [filterKey, column] of filterColumns) {
+    const value = filters[filterKey];
+    if (value) {
+      whereConditions.push(`LOWER(${column}) = LOWER($${paramIndex})`);
+      queryParams.push(value);
+      paramIndex++;
+    }
+  }
+
+  const whereClause =
+    whereConditions.length > 0 ? `WHERE ${whereConditions.join(" AND ")}` : "";
+
+  const [result, error] = await tryCatch(() =>
+    pool.query<ProgramRow>(
+      `SELECT id, university, institution_type, country, campus_city, program_type,
+              program_title, field_of_study, tuition_amount, tuition_currency,
+              application_fee_amount, application_fee_currency, duration_months,
+              image_url, intakes, COUNT(*) OVER() AS total_count
+       FROM public.programs
+       ${whereClause}
+       ORDER BY created_at DESC
+       LIMIT ${RESULTS_LIMIT}`,
+      queryParams,
+    ),
+  );
+
+  if (error) return { programs: [] as ProgramRow[], total: 0 };
+
+  const total =
+    result.rows.length > 0 ? parseInt(result.rows[0].total_count, 10) : 0;
+  return { programs: result.rows, total };
+}
+
+export default async function ProgramsPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | undefined>>;
+}) {
+  const params = await searchParams;
+  const filters: ProgramsFilterValues = {
+    country: params.country || undefined,
+    institution_type: params.institution_type || undefined,
+    university: params.university || undefined,
+    program_type: params.program_type || undefined,
+    field_of_study: params.field_of_study || undefined,
+  };
+
+  const [filterOptions, { programs, total }] = await Promise.all([
+    fetchFilterOptions(),
+    fetchPrograms(filters),
+  ]);
+
   return (
     <main className="pt-14">
       <section className="mx-auto max-w-screen-2xl px-6 md:px-12">
@@ -49,8 +164,11 @@ export default async function ProgramsPage() {
             {/* Heading container */}
             <div className="flex items-center justify-between py-3 max-sm:text-sm">
               <p className="text-black">
-                Results 1 - 10 <br className="sm:hidden" />
-                (out of 142 programs)
+                {total === 0
+                  ? "No programs found"
+                  : `Results 1 - ${programs.length}`}
+                <br className="sm:hidden" />
+                {total > 0 && ` (out of ${total} program${total === 1 ? "" : "s"})`}
               </p>
 
               {/* sort container */}
@@ -64,15 +182,47 @@ export default async function ProgramsPage() {
             </div>
 
             {/* programs list */}
-            <div className="mt-6 space-y-6">
-              {programs.map((program, idx) => (
-                <ProgramCard key={idx} {...program} />
-              ))}
-            </div>
+            {programs.length === 0 ? (
+              <div className="mt-6 rounded-3xl border-2 border-dashed border-[#e0e0e0] bg-[#f9f9f9] py-16 text-center">
+                <p className="text-lg text-neutral-300">
+                  No programs match your filters.
+                </p>
+                <p className="mt-2 text-sm text-neutral-300">
+                  Try adjusting or clearing your search criteria.
+                </p>
+              </div>
+            ) : (
+              <div className="mt-6 space-y-6">
+                {programs.map((program) => (
+                  <ProgramCard
+                    key={program.id}
+                    image={program.image_url}
+                    university={program.university}
+                    programType={program.program_type}
+                    programTitle={program.program_title}
+                    location={program.country}
+                    campusCity={`${program.campus_city}, ${program.country}`}
+                    tuition={formatMoney(
+                      program.tuition_amount,
+                      program.tuition_currency,
+                    )}
+                    applicationFee={formatMoney(
+                      program.application_fee_amount,
+                      program.application_fee_currency,
+                    )}
+                    duration={formatDuration(program.duration_months)}
+                    intakes={program.intakes}
+                  />
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Filters */}
-          <ProgramsFilterForm />
+          <ProgramsFilterForm
+            filterOptions={filterOptions}
+            defaultValues={filters}
+          />
         </div>
       </section>
     </main>
