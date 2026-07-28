@@ -112,6 +112,14 @@ async function fetchPrograms(filters: ProgramsFilterValues) {
     }
   }
 
+  if (filters.search) {
+    whereConditions.push(
+      `(program_title ILIKE $${paramIndex} OR field_of_study ILIKE $${paramIndex} OR university ILIKE $${paramIndex})`,
+    );
+    queryParams.push(`%${filters.search}%`);
+    paramIndex++;
+  }
+
   const whereClause =
     whereConditions.length > 0 ? `WHERE ${whereConditions.join(" AND ")}` : "";
 
@@ -143,6 +151,7 @@ export default async function ProgramsPage({
 }) {
   const params = await searchParams;
   const filters: ProgramsFilterValues = {
+    search: params.search || undefined,
     country: params.country || undefined,
     institution_type: params.institution_type || undefined,
     university: params.university || undefined,

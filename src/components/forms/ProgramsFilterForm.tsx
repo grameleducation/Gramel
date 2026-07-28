@@ -13,6 +13,7 @@ export interface ProgramsFilterOptions {
 }
 
 export interface ProgramsFilterValues {
+  search?: string;
   country?: string;
   institution_type?: string;
   university?: string;
@@ -36,6 +37,14 @@ export default function ProgramsFilterForm({
       <h3 className="rounded-[0.625rem] bg-primary p-4 text-2xl font-semibold text-white">
         Filter
       </h3>
+
+      <input
+        type="text"
+        name="search"
+        defaultValue={defaultValues.search}
+        placeholder="What would you like to study?"
+        className="block w-full rounded-xl border border-transparent bg-[#EFEFEF] p-4 text-neutral-500 shadow-sm transition-all duration-200 placeholder:text-sm placeholder:text-[#626060] hover:ring-3 hover:ring-[#62A9DC]/50 focus:ring-3 focus:ring-[#62A9DC] focus:outline-none"
+      />
 
       <div className="space-y-2.5">
         <h4 className="font-semibold text-black">Quick Location</h4>
