@@ -5,7 +5,7 @@ import { z } from "zod";
 // back to safe defaults instead of failing the build.
 const envSchema = z.object({
   // base url
-  NEXT_PUBLIC_BASE_URL: z.string().url().optional(),
+  NEXT_PUBLIC_BASE_URL: z.string().trim().min(1).optional(),
   // hcaptcha
   NEXT_PUBLIC_HCAPTCHA_SITE_KEY: z.string().trim().min(1).optional(),
   // applyboard

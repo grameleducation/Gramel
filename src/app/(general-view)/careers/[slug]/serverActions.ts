@@ -118,34 +118,22 @@ export async function submitJobApplicationAction(
     };
   }
 
-  // Notify admins. Best-effort: application is already saved even if this fails.
-  const [adminsResult] = await tryCatch(() =>
-    pool.query<{ email: string }>(
-      `SELECT email FROM public.users WHERE role = 'admin'`,
-    ),
-  );
-
-  if (adminsResult) {
-    const emailParams = {
-      roleTitle: role.title,
-      fullName,
-      email,
-      phone,
-      cvUrl,
-      message,
-    };
-    await Promise.all(
-      adminsResult.rows.map((admin) =>
-        transporter.sendMail({
-          from: server_env.SMTP_USER!,
-          to: admin.email,
-          subject: jobApplicationReceived.subject,
-          text: jobApplicationReceived.text(emailParams),
-          html: jobApplicationReceived.html(emailParams),
-        }),
-      ),
-    ).catch(() => {});
-  }
+  // Notify sales team. Best-effort: application is already saved even if this fails.
+  const emailParams = {
+    roleTitle: role.title,
+    fullName,
+    email,
+    phone,
+    cvUrl,
+    message,
+  };
+  await transporter.sendMail({
+    from: server_env.SMTP_USER!,
+    to: 'sales@grameleducation.com',
+    subject: jobApplicationReceived.subject,
+    text: jobApplicationReceived.text(emailParams),
+    html: jobApplicationReceived.html(emailParams),
+  }).catch(() => {});
 
   return {
     success: true,
