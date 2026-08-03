@@ -2,6 +2,28 @@ import { v2 as cloudinary } from "cloudinary";
 import server_env from "@/utils/env.server";
 import pool from "@/utils/db";
 
+export async function POST() {
+  cloudinary.config({
+    cloud_name: server_env.CLOUDINARY_CLOUD_NAME,
+    api_key: server_env.CLOUDINARY_API_KEY,
+    api_secret: server_env.CLOUDINARY_API_SECRET,
+  });
+
+  try {
+    const res = await cloudinary.api.create_upload_preset({
+      name: "gramel_job_application_cvs",
+      unsigned: false,
+      folder: "gramel/career-applications",
+    });
+    return Response.json({ created: true, res });
+  } catch (err) {
+    return Response.json(
+      { created: false, error: err instanceof Error ? err.message : String(err) },
+      { status: 500 },
+    );
+  }
+}
+
 export async function GET() {
   const results: Record<string, string> = {};
 
