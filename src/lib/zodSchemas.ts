@@ -460,3 +460,12 @@ export const searchFieldSchema = z.enum([
   "middle_name",
   "last_name",
 ]);
+
+// Schema for job application form validation
+export const jobApplicationSchema = z.object({
+  fullName: z.string().trim().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Invalid email address"),
+  phone: z.string().trim().min(7, "Please enter a valid phone number"),
+  cvUrl: z.string().url("Please upload your CV"),
+  message: z.string().trim().max(2000).optional(),
+});

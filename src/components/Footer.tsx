@@ -59,6 +59,15 @@ export default function Footer() {
             </li>
             <li>
               <Link
+                href={toHref("/careers")}
+                className="hover:text-neutral-500"
+                prefetch={false}
+              >
+                Careers
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="#"
                 className="hover:text-neutral-500"
                 prefetch={false}

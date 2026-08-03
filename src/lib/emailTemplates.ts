@@ -233,7 +233,65 @@ Gramel Education
       <p>You can log in to the admin dashboard to review this payment and related details.</p>
     </div>
 
-    <div 
+    <div
+      style="margin-top: 24px; padding-top: 16px; border-top: 1px solid ${styles.colors.border}; color: ${styles.colors.text}; font-size: 13px; text-align: center;"
+    >
+      <p>Best regards,<br>Gramel Education</p>
+    </div>
+  </div>
+`,
+};
+
+// New job application received (admin notification)
+export const jobApplicationReceived: EmailTemplate<{
+  roleTitle: string;
+  fullName: string;
+  email: string;
+  phone: string;
+  cvUrl: string;
+  message?: string;
+}> = {
+  subject: "New Job Application Received",
+  text: ({ roleTitle, fullName, email, phone, cvUrl, message }) => `
+A new application has been submitted on Gramel Education's careers page.
+
+Role: ${roleTitle}
+Applicant: ${fullName}
+Email: ${email}
+Phone: ${phone}
+CV: ${cvUrl}
+${message ? `\nMessage:\n${message}\n` : ""}
+Best regards,
+Gramel Education
+`,
+  html: ({ roleTitle, fullName, email, phone, cvUrl, message }) => `
+  <div
+    style="font-family: ${styles.fonts.main}; max-width: 600px; margin: 0 auto; padding: 20px; background: ${styles.colors.background}; border: 1px solid ${styles.colors.border}; border-radius: 5px;"
+  >
+    <div style="text-align: center; margin-bottom: 24px;">
+      <h2 style="color: ${styles.colors.primary}; margin: 0;">
+        New Job Application Received
+      </h2>
+    </div>
+
+    <div style="color: ${styles.colors.text}; font-size: 15px; line-height: 1.6; margin-bottom: 20px;">
+      <p>A new application has been submitted on Gramel Education's careers page.</p>
+    </div>
+
+    <div style="color: ${styles.colors.text}; font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
+      <p><strong>Role:</strong> ${roleTitle}</p>
+      <p><strong>Applicant:</strong> ${fullName}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Phone:</strong> ${phone}</p>
+      <p><strong>CV:</strong> <a href="${cvUrl}">${cvUrl}</a></p>
+      ${
+        message
+          ? `<p><strong>Message:</strong></p><div style="white-space: pre-wrap; background-color: #f9f9f9; border-radius: 4px; padding: 10px;">${message}</div>`
+          : ""
+      }
+    </div>
+
+    <div
       style="margin-top: 24px; padding-top: 16px; border-top: 1px solid ${styles.colors.border}; color: ${styles.colors.text}; font-size: 13px; text-align: center;"
     >
       <p>Best regards,<br>Gramel Education</p>
