@@ -168,10 +168,6 @@ BEFORE UPDATE ON public.payment_transactions
 FOR EACH ROW
 EXECUTE FUNCTION public.set_updated_at();
 
--- Create indexes for faster lookups/joins
-
-CREATE INDEX idx_users_role_gender ON public.users(role, gender);
-
 -- Create indexes for faster transaction grouping
 
 CREATE INDEX idx_payment_transactions_status ON public.payment_transactions(status);
