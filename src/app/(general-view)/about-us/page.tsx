@@ -4,6 +4,7 @@ import gramel_icon from "../../../../public/gramel-icon.png";
 import gramel_white_icon from "../../../../public/gramel-white-icon.png";
 import React from "react";
 import CTASection from "@/components/CTASection";
+import FadeIn from "@/components/motion/FadeIn";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -25,13 +26,13 @@ const timeline = [
   },
   {
     year: "2021",
-    title: "Partnership with ApplyBoard",
-    body: "We joined ApplyBoard's partner network, giving our students access to thousands of institutions worldwide from one centralized platform.",
+    title: "Global Partner Network Expands",
+    body: "We grew our network of global education partners, giving our students access to thousands of institutions worldwide from one centralized platform.",
   },
   {
     year: "2022",
     title: "Launch of Financial Support Services",
-    body: "Introduced guidance on student loans, scholarships, and income share agreements—making global education more affordable for African students.",
+    body: "Introduced guidance on scholarships and income share agreements—making global education more affordable for African students.",
   },
   {
     year: "2023",
@@ -63,7 +64,7 @@ export default async function AboutUsPage() {
   return (
     <main className="pt-14">
       <section className="px-6 md:px-12 xl:px-20">
-        <div className="relative mx-auto h-64 max-w-[83.75rem] overflow-hidden rounded-2xl bg-primary md:h-[27.875rem]">
+        <div className="relative mx-auto h-64 max-w-[83.75rem] overflow-hidden rounded-2xl bg-primary shadow-xl md:h-[27.875rem]">
           <Image
             src="https://res.cloudinary.com/dqeqlgygu/image/upload/v1754940044/gramel/public/about-us-page/about-us-page-banner_ufweik.jpg"
             alt="A university building"
@@ -72,8 +73,9 @@ export default async function AboutUsPage() {
             className="h-full w-full rounded-2xl object-cover"
             priority
           />
+          <div className="absolute top-0 h-full w-full bg-gradient-to-t from-primary/80 via-primary/40 to-transparent" />
 
-          <div className="absolute top-1/2 left-1/2 w-full -translate-1/2 px-4 text-center">
+          <FadeIn className="absolute top-1/2 left-1/2 w-full -translate-1/2 px-4 text-center">
             <h1 className="mb-6 text-4xl font-semibold text-white md:text-6xl">
               About Us
             </h1>
@@ -81,14 +83,14 @@ export default async function AboutUsPage() {
               Learn more about who we are, what we stand for, and how we&apos;re
               helping students achieve their international education goals.
             </p>
-          </div>
+          </FadeIn>
         </div>
       </section>
 
       <section className="px-6 md:px-12 lg:mt-14 xl:px-20">
         <div className="mx-auto flex max-w-[71.25rem] flex-col gap-10 py-12 lg:flex-row lg:gap-15 xl:gap-20">
           {/* Left Column: Text Content */}
-          <div className="flex-1">
+          <FadeIn direction="left" className="flex-1">
             <h2 className="mb-5 text-3xl leading-tight font-semibold tracking-tight text-primary max-lg:text-center md:text-4xl xl:text-5xl">
               Empowering Students, Transforming Futures
             </h2>
@@ -101,10 +103,14 @@ export default async function AboutUsPage() {
               simplify the process and amplify your chances of success.
             </p>
             <AboutAccordion />
-          </div>
+          </FadeIn>
 
           {/* Image container */}
-          <div className="h-[21.25rem] w-full rounded-2xl bg-[#dee2e5] md:h-[26.25rem] lg:h-auto lg:w-1/2 lg:max-w-[31.25rem]">
+          <FadeIn
+            direction="right"
+            delay={0.15}
+            className="h-[21.25rem] w-full rounded-2xl bg-[#dee2e5] shadow-xl md:h-[26.25rem] lg:h-auto lg:w-1/2 lg:max-w-[31.25rem]"
+          >
             <Image
               src="https://res.cloudinary.com/dqeqlgygu/image/upload/v1754940047/gramel/public/about-us-page/clay-banks_b4u096.jpg"
               alt="Clay Banks"
@@ -113,14 +119,14 @@ export default async function AboutUsPage() {
               className="h-full w-full rounded-2xl object-cover"
               sizes="(min-width: 1024px) 50vw, 100vw"
             />
-          </div>
+          </FadeIn>
         </div>
       </section>
 
       <section className="bg-[#f1f4ff] px-6 py-15 md:px-12 md:py-25 lg:mt-14 xl:px-20">
         <div className="mx-auto grid max-w-[71.25rem] grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-15">
           {/* Image container */}
-          <div className="h-96 rounded-3xl bg-[#8ec3fb] p-6 lg:h-auto">
+          <FadeIn direction="left" className="h-96 rounded-3xl bg-[#8ec3fb] p-6 shadow-xl lg:h-auto">
             <Image
               src="https://res.cloudinary.com/dqeqlgygu/image/upload/v1754940050/gramel/public/about-us-page/institution-building_s17xkd.jpg"
               alt="A university building"
@@ -129,10 +135,10 @@ export default async function AboutUsPage() {
               className="h-full w-full rounded-2xl object-cover"
               sizes="(min-width: 1024px) 50vw, 100vw"
             />
-          </div>
+          </FadeIn>
 
           {/* our story */}
-          <div>
+          <FadeIn direction="right" delay={0.15}>
             <div className="flex items-center gap-3">
               <Image src={gramel_icon} alt="Gramel Icon" className="h-6" />
               <p className="text-lg leading-normal text-primary-300">
@@ -155,7 +161,7 @@ export default async function AboutUsPage() {
                 schools abroad.
                 <br />
                 <br />
-                Through partnerships with global platforms like ApplyBoard and a
+                Through our growing network of global education partners and a
                 deep understanding of local student needs, we’ve built a model
                 that combines tech-driven efficiency with human support.
               </p>
@@ -165,33 +171,35 @@ export default async function AboutUsPage() {
                 changing lives, one success story at a time.
               </p>
             </div>
-          </div>
+          </FadeIn>
         </div>
       </section>
 
       <section className="mt-15 bg-primary px-6 py-20 text-white md:px-12 xl:px-20">
         <div className="mx-auto max-w-screen-xl">
-          <div className="mx-auto flex max-w-max items-center gap-3">
-            <Image src={gramel_white_icon} alt="Gramel Icon" className="h-6" />
-            <p className="text-lg leading-normal text-primary-300">
-              OUR VISION
-            </p>
-          </div>
+          <FadeIn>
+            <div className="mx-auto flex max-w-max items-center gap-3">
+              <Image src={gramel_white_icon} alt="Gramel Icon" className="h-6" />
+              <p className="text-lg leading-normal text-primary-300">
+                OUR VISION
+              </p>
+            </div>
 
-          <div className="mt-4 space-y-6">
-            <h2 className="mx-auto max-w-[53rem] text-center text-3xl leading-tight font-semibold lg:text-5xl">
-              A World Where Every Ambitious Student Has the Chance to Go Global
-            </h2>
+            <div className="mt-4 space-y-6">
+              <h2 className="mx-auto max-w-[53rem] text-center text-3xl leading-tight font-semibold lg:text-5xl">
+                A World Where Every Ambitious Student Has the Chance to Go Global
+              </h2>
 
-            <p className="mx-auto max-w-[64.5rem] text-center text-[#E6E6EB] lg:text-lg">
-              At Gramel Education, our vision is to become Africa&apos;s most
-              trusted bridge to global education—helping thousands of students
-              not just gain admission, but truly thrive abroad. We see a future
-              where borders don&apos;t limit brilliance, where a student in any
-              city or village can access world-class education, and where
-              financial or systemic barriers no longer hold anyone back.
-            </p>
-          </div>
+              <p className="mx-auto max-w-[64.5rem] text-center text-[#E6E6EB] lg:text-lg">
+                At Gramel Education, our vision is to become Africa&apos;s most
+                trusted bridge to global education—helping thousands of students
+                not just gain admission, but truly thrive abroad. We see a future
+                where borders don&apos;t limit brilliance, where a student in any
+                city or village can access world-class education, and where
+                financial or systemic barriers no longer hold anyone back.
+              </p>
+            </div>
+          </FadeIn>
 
           {/* Timeline Section */}
           <div className="mt-16 flex flex-col flex-wrap items-center justify-between gap-8 md:flex-row">
@@ -215,7 +223,7 @@ export default async function AboutUsPage() {
 
       <section className="mb-15 bg-[#1e1e1e] px-6 py-20 text-white md:px-12 lg:py-25 xl:px-20">
         <div className="mx-auto max-w-[72.5rem]">
-          <div className="space-y-5">
+          <FadeIn className="space-y-5">
             <div className="mx-auto flex max-w-max items-center gap-3">
               <Image
                 src={gramel_white_icon}
@@ -237,11 +245,11 @@ export default async function AboutUsPage() {
               students across Africa and beyond. Our mission is rooted in four
               core principles:
             </p>
-          </div>
+          </FadeIn>
 
           <div className="mt-16 grid grid-cols-1 gap-10 lg:grid-cols-[auto_1fr] lg:gap-15">
             {/* Image container */}
-            <div className="h-96 rounded-2xl bg-primary-300 lg:h-auto lg:w-md">
+            <FadeIn direction="left" className="h-96 rounded-2xl bg-primary-300 shadow-xl lg:h-auto lg:w-md">
               <Image
                 src="https://res.cloudinary.com/dqeqlgygu/image/upload/v1754940046/gramel/public/about-us-page/red-building_hkbgon.jpg"
                 alt="A university building"
@@ -250,7 +258,7 @@ export default async function AboutUsPage() {
                 className="h-full w-full rounded-2xl object-cover"
                 sizes="(min-width: 1024px) 50vw, 100vw"
               />
-            </div>
+            </FadeIn>
 
             <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
               <div className="space-y-2.5">
@@ -295,7 +303,7 @@ export default async function AboutUsPage() {
                 </h5>
 
                 <div className="text-[#5c6c7b]">
-                  From low-interest student loans to income share agreements and
+                  From scholarship guidance to income share agreements and
                   funding support, we help students find smarter ways to pay for
                   education without getting buried in debt.
                 </div>

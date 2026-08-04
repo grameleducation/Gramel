@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import type { Metadata } from "next";
 import PaymentSection from "./PaymentSection";
 import { servicesDetails } from "./servicesData";
 import pool from "@/utils/db";
@@ -8,8 +9,33 @@ import type { ServiceDetail } from "./types";
 
 export const revalidate = 3600; // revalidate once in one hour
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://grameleducation.com";
+
 export async function generateStaticParams() {
   return Object.keys(servicesDetails).map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const service = servicesDetails[slug];
+  if (!service) return {};
+
+  return {
+    title: service.title,
+    description: service.summary,
+    alternates: { canonical: `${SITE_URL}/services/${slug}` },
+    openGraph: {
+      title: `${service.title} | Gramel Education`,
+      description: service.summary,
+      url: `${SITE_URL}/services/${slug}`,
+      images: service.image ? [{ url: service.image }] : undefined,
+    },
+  };
 }
 
 async function getServiceDetailsWithCurrentPrices(
@@ -82,8 +108,30 @@ export default async function ServiceDetailPage({
   const service = await getServiceDetailsWithCurrentPrices(slug);
   if (!service) return notFound();
 
+  const serviceJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: service.title,
+    name: `${service.title} | Gramel Education`,
+    description: service.summary,
+    provider: {
+      "@type": "EducationalOrganization",
+      name: "Gramel Education",
+      url: SITE_URL,
+    },
+    areaServed: {
+      "@type": "Country",
+      name: "Nigeria",
+    },
+    url: `${SITE_URL}/services/${slug}`,
+  };
+
   return (
     <main className="">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+      />
       <div className="mx-auto max-w-screen-2xl px-6 pt-12 md:px-12 xl:px-20">
         {service.image && (
           <Image

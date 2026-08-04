@@ -11,7 +11,7 @@ export default function ApplyBoardIframe() {
   return (
     <iframe
       src={`https://www.applyboard.com/partners/${client_env.NEXT_PUBLIC_APPLYBOARD_PARTNER_ID}/intake-form`}
-      title="ApplyBoard Form"
+      title="Consultation Booking Form"
       onLoad={() => setHeight(() => (isMobile ? "2370px" : "1980px"))}
       style={{ height }}
       className="w-full border-none"

@@ -3,14 +3,14 @@ import { ServiceDetail } from "./types";
 // NOTE: All prices are placeholders. Actual prices will be fetched from the database
 export const servicesDetails: Record<string, ServiceDetail> = {
   "international-admissions": {
-    title: "International Admissions",
+    title: "Admissions",
     price: 0, // price is determined by selected application option
     summary:
-      "We help you apply to top universities, colleges, and schools. From program selection to document review, we streamline the process through our partnership with ApplyBoard, giving you access to over 1,500 global institutions.",
+      "Getting into the right school starts with the right application. From program selection to document review, we streamline every step through our network of trusted global partners, giving you access to over 1,500 institutions worldwide.",
     details: [
-      "Our International Admissions service is designed to simplify your journey to studying abroad. We provide personalized counseling to help you choose the right program and institution based on your academic background, career goals, and budget.",
+      "Our Admissions service is designed to simplify your journey to studying abroad. We provide personalized counseling to help you choose the right program and institution based on your academic background, career goals, and budget.",
       "Our team assists with every step of the application process, including document preparation, application submission, and follow-up with institutions. We also offer guidance on writing compelling personal statements and preparing for interviews.",
-      "Through our partnership with ApplyBoard, you gain access to a vast network of universities and colleges worldwide, increasing your chances of admission and scholarship opportunities.",
+      "Through our network of trusted global education partners, you gain access to a vast range of universities and colleges worldwide, increasing your chances of admission and scholarship opportunities.",
       `<p>Available application packages:</p>
       <ul class="list-disc pl-6">
         <li><strong>Single Application</strong>: Apply to one school, get one more for free (₦400,000)</li>
@@ -29,7 +29,7 @@ export const servicesDetails: Record<string, ServiceDetail> = {
     title: "Document Verification",
     price: 1,
     summary:
-      "Writing a strong Statement of Purpose, preparing recommendation letters, and assembling the right documents are key to getting accepted. We provide templates, reviews, and coaching to ensure your application stands out.",
+      "A strong application lives or dies by its paperwork. We polish your Statement of Purpose, recommendation letters, and every supporting document until your file is impossible to overlook.",
     details: [
       "Our Document Verification service ensures that all your application materials meet the highest standards. We review your transcripts, certificates, recommendation letters, and other required documents for accuracy and completeness.",
       "We provide templates and personalized feedback to help you craft a compelling Statement of Purpose and other essays. Our experts also coach you on how to present your achievements and experiences effectively.",
@@ -43,7 +43,7 @@ export const servicesDetails: Record<string, ServiceDetail> = {
     title: "Scholarships",
     price: 1,
     summary:
-      "Looking for ways to reduce your tuition? Our team helps you search and apply for merit-based and need-based scholarships that match your academic and personal profile.",
+      "Tuition shouldn't be the reason you don't go. Our team hunts down merit-based and need-based scholarships that match your profile, then helps you build an application that wins them.",
     details: [
       "We understand that financing your education abroad can be challenging. Our Scholarships service is dedicated to helping you find and apply for scholarships that fit your profile.",
       "We maintain an up-to-date database of scholarship opportunities from institutions, governments, and private organizations. Our team assists you in preparing strong applications, including essays and supporting documents.",
@@ -57,7 +57,7 @@ export const servicesDetails: Record<string, ServiceDetail> = {
     title: "Visa Assistance",
     price: 1,
     summary:
-      "Visa requirements can be complex, but our experts simplify the process. We help you prepare the right documents, fill out visa forms correctly, and even conduct mock interviews to boost your chances of approval.",
+      "One denied visa can derail an entire admission. Our experts turn a complex, high-stakes process into a clear checklist—right documents, correct forms, and interview practice that builds real confidence.",
     details: [
       "Navigating visa requirements can be overwhelming. Our Visa Assistance service guides you through the entire process, from understanding the requirements to submitting your application.",
       "We help you gather and organize all necessary documents, complete visa forms accurately, and prepare for embassy interviews. Our team conducts mock interviews to help you feel confident and prepared.",
@@ -71,9 +71,9 @@ export const servicesDetails: Record<string, ServiceDetail> = {
     title: "Language Proficiency Tests",
     price: 0,
     summary:
-      "Planning to take a Prometric exam for medical, nursing, or professional certification abroad? We provide full support to help you register, prepare, and succeed.",
+      "IELTS, TOEFL, or another proficiency exam standing between you and your offer letter? We handle registration, prep, and strategy so you walk in ready to hit your target score.",
     details: [
-      "Our Language Proficiency Tests service supports students and professionals preparing for exams such as IELTS, TOEFL, and Prometric tests.",
+      "Our Language Proficiency Tests service supports students and professionals preparing for exams such as IELTS, TOEFL, and other proficiency and admissions tests.",
       "We offer guidance on exam registration, provide study resources, and connect you with experienced tutors for personalized coaching.",
       `<p>Available tests:</p>
       <ul class="list-disc pl-6">
@@ -96,25 +96,11 @@ export const servicesDetails: Record<string, ServiceDetail> = {
     image:
       "https://res.cloudinary.com/dqeqlgygu/image/upload/v1754940941/gramel/public/services-page/services-page-banner_n2bauf.jpg",
   },
-  "student-loan": {
-    title: "Student Loan",
-    price: 1,
-    summary:
-      "We assist with securing local and international education loans. From explaining repayment terms to submitting documentation, we walk you through every step with trusted financial institutions.",
-    details: [
-      "Financing your education is easier with our Student Loan service. We connect you with reputable lenders offering competitive rates and flexible repayment options.",
-      "Our advisors explain the terms and conditions of various loan products, help you gather the required documents, and assist with the application process.",
-      "We also provide ongoing support to help you manage your loan and plan for repayment after graduation.",
-    ],
-    serviceCode: "LOAN",
-    image:
-      "https://res.cloudinary.com/dqeqlgygu/image/upload/v1754940941/gramel/public/services-page/services-page-banner_n2bauf.jpg",
-  },
   "advisory-services": {
     title: "Advisory Services",
     price: 1,
     summary:
-      "Receive personalized guidance on academic program selection, financial planning, and career pathways to ensure you make informed decisions for your future.",
+      "Not sure where to even begin? One-on-one advisory sessions give you a clear, personalized roadmap—program selection, funding strategy, and career pathway—so every decision moves you forward.",
     details: [
       "Our Advisory Services are tailored to your unique needs and aspirations. We offer one-on-one counseling sessions to help you clarify your goals and explore your options.",
       "Our experts provide insights on academic programs, career prospects, and financial planning, empowering you to make informed decisions.",

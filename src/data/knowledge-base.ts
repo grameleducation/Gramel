@@ -94,13 +94,6 @@ export const knowledgeBase: KnowledgeBaseCategory[] = [
           "Many countries allow part-time work during studies (typically 20 hours/week). However, don't rely solely on part-time income—it usually covers basics only. Plan for significant savings before departure and explore scholarships and financial aid.",
         category: "scholarships-funding",
       },
-      {
-        id: "fund-5",
-        question: "What are student loans for international education?",
-        answer:
-          "Some institutions and governments offer loans to international students. Research educational loans from your home country, international loan providers, and your destination country. Compare interest rates and repayment terms carefully before committing.",
-        category: "scholarships-funding",
-      },
     ],
   },
   {

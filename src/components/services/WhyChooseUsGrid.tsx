@@ -19,7 +19,7 @@ const reasons: ReasonCard[] = [
     icon: Briefcase,
     title: "Global School Access",
     description:
-      "Gain access to over 1,500+ accredited institutions through our partnership with ApplyBoard. From Canada to Australia, the UK to the U.S., we open doors to quality education around the world.",
+      "Gain access to over 1,500+ accredited institutions through our network of trusted global partners. From Canada to Australia, the UK to the U.S., we open doors to quality education around the world.",
   },
   {
     icon: Wallet,
@@ -31,7 +31,7 @@ const reasons: ReasonCard[] = [
     icon: Globe,
     title: "Complete Financial Support",
     description:
-      "We don’t just help you apply, we help you afford it. From student loans to scholarship applications, we guide you toward the most sustainable financial options.",
+      "We don’t just help you apply, we help you afford it. From scholarship applications to income share agreements, we guide you toward the most sustainable financial options.",
   },
   {
     icon: Timeline,

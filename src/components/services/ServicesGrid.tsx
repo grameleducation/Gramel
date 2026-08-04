@@ -5,7 +5,6 @@ import {
   Planet,
   Student,
   Translate,
-  MoneyCash,
   UserSound,
 } from "@/lib/icons";
 import Link from "next/link";
@@ -21,52 +20,45 @@ interface Service {
 const services: Service[] = [
   {
     icon: Student,
-    title: "International Admissions",
+    title: "Admissions",
     href: "international-admissions",
     description:
-      "We help you apply to top universities, colleges, and schools. From program selection to document review, we streamline the process through our partnership with ApplyBoard, giving you access to over 1,500 global institutions.",
+      "Getting into the right school starts with the right application. From program selection to document review, we streamline every step through our network of trusted global partners, giving you access to over 1,500 institutions worldwide.",
   },
   {
     icon: FileArchive,
     title: "Document Verification",
     href: "document-verification",
     description:
-      "Writing a strong Statement of Purpose, preparing recommendation letters, and assembling the right documents are key to getting accepted. We provide templates, reviews, and coaching to ensure your application stands out.",
+      "A strong application lives or dies by its paperwork. We polish your Statement of Purpose, recommendation letters, and every supporting document until your file is impossible to overlook.",
   },
   {
     icon: Planet,
     title: "Scholarships",
     href: "scholarships",
     description:
-      "Looking for ways to reduce your tuition? Our team helps you search and apply for merit-based and need-based scholarships that match your academic and personal profile.",
+      "Tuition shouldn't be the reason you don't go. Our team hunts down merit-based and need-based scholarships that match your profile, then helps you build an application that wins them.",
   },
   {
     icon: AirplaneTilt,
     title: "Visa Assistance",
     href: "visa-assistance",
     description:
-      "Visa requirements can be complex, but our experts simplify the process. We help you prepare the right documents, fill out visa forms correctly, and even conduct mock interviews to boost your chances of approval.",
+      "One denied visa can derail an entire admission. Our experts turn a complex, high-stakes process into a clear checklist—right documents, correct forms, and interview practice that builds real confidence.",
   },
   {
     icon: Translate,
     title: "Language Proficiency Tests",
     href: "language-proficiency-tests",
     description:
-      "Planning to take a Prometric exam for medical, nursing, or professional certification abroad? We provide full support to help you register, prepare, and succeed.",
-  },
-  {
-    icon: MoneyCash,
-    title: "Student Loan",
-    href: "student-loan",
-    description:
-      "We assist with securing local and international education loans. From explaining repayment terms to submitting documentation, we walk you through every step with trusted financial institutions.",
+      "IELTS, TOEFL, or another proficiency exam standing between you and your offer letter? We handle registration, prep, and strategy so you walk in ready to hit your target score.",
   },
   {
     icon: UserSound,
     title: "Advisory Services",
     href: "advisory-services",
     description:
-      "Receive personalized guidance on academic program selection, financial planning, and career pathways to ensure you make informed decisions for your future.",
+      "Not sure where to even begin? One-on-one advisory sessions give you a clear, personalized roadmap—program selection, funding strategy, and career pathway—so every decision moves you forward.",
   },
 ];
 

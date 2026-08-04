@@ -22,6 +22,7 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about-us", label: "About Us" },
   { href: "/services", label: "Services" },
+  { href: "/programs", label: "Programs" },
   { href: "/assist", label: "Assist" },
   { href: "/contact", label: "Contact Us" },
 ];
@@ -50,13 +51,12 @@ function useMainSiteHref() {
 const serviceLinks = [
   {
     slug: "international-admissions",
-    title: "International Admission Processing",
+    title: "Admissions",
   },
   { slug: "document-verification", title: "Document Verification" },
   { slug: "scholarships", title: "Scholarships" },
   { slug: "visa-assistance", title: "Visa Assistance" },
   { slug: "language-proficiency-tests", title: "Language Proficiency Tests" },
-  { slug: "student-loan", title: "Student Loan" },
   { slug: "advisory-services", title: "Advisory Services" },
 ];
 

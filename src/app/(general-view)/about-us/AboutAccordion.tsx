@@ -5,7 +5,7 @@ import { useState } from "react";
 const ACCORDION_DATA = [
   {
     title: "Global Reach, Local Support",
-    content: `We partner with over 1,500 institutions across Canada, the UK, USA, Australia, and beyond—through ApplyBoard and other trusted platforms. At the same time, we offer local advisors who understand your unique background, cultural context, and personal goals.`,
+    content: `We partner with over 1,500 institutions across Canada, the UK, USA, Australia, and beyond—through our network of trusted global education partners. At the same time, we offer local advisors who understand your unique background, cultural context, and personal goals.`,
   },
   {
     title: "Student-Centered, Results-Driven",

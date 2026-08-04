@@ -18,15 +18,21 @@ export const metadata: Metadata = {
     template: "%s | Gramel Education",
   },
   description:
-    "Gramel Education is a leading study abroad agency and company in Abuja, Nigeria, helping students across Nigeria access international education, student loans, scholarships, and visa support for the US, UK, Canada, Australia, and beyond.",
+    "Gramel Education is Nigeria's trusted study abroad agency based in Abuja, helping students across Nigeria access international admissions, scholarships, visa assistance, and advisory services for the US, UK, Canada, Australia, and beyond.",
   keywords: [
-    "Study Abroad agency in abuja",
-    "Study Abroad company in abuja",
-    "Study Abroad company in nigeria",
+    "Study abroad agency in Abuja",
+    "Study abroad agency in Abuja Nigeria",
+    "Best study abroad agency in Abuja",
+    "Study abroad company in Abuja",
+    "Study abroad consultants in Abuja",
+    "Study abroad agency in Nigeria",
+    "Study abroad agents in Nigeria",
+    "International education consultants Nigeria",
+    "University admission agency Abuja",
+    "Visa assistance Abuja",
+    "Scholarship consultants Nigeria",
     "International Education",
     "Travel Agencies",
-    "Study Abroad Agents In Nigeria",
-    "Study Abroad agency in nigeria",
   ],
   openGraph: {
     type: "website",
@@ -35,7 +41,7 @@ export const metadata: Metadata = {
     siteName: "Gramel Education",
     title: "Gramel Education | Study Abroad Agency in Abuja, Nigeria",
     description:
-      "Nigeria's trusted study abroad agency, based in Abuja. We guide students through international admissions, scholarships, student loans, and visa support.",
+      "Nigeria's trusted study abroad agency, based in Abuja. We guide students through international admissions, scholarships, and visa support.",
     images: [
       {
         url: "/gramel-education-logo.png",
@@ -49,7 +55,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Gramel Education | Study Abroad Agency in Abuja, Nigeria",
     description:
-      "Nigeria's trusted study abroad agency, based in Abuja. We guide students through international admissions, scholarships, student loans, and visa support.",
+      "Nigeria's trusted study abroad agency, based in Abuja. We guide students through international admissions, scholarships, and visa support.",
   },
   alternates: {
     canonical: SITE_URL,
@@ -64,7 +70,7 @@ const organizationJsonLd = {
   url: SITE_URL,
   logo: `${SITE_URL}/gramel-education-logo.png`,
   description:
-    "Gramel Education is a study abroad agency and company based in Abuja, Nigeria, providing international education placement, student loans, scholarships, visa assistance, and advisory services for students across Nigeria.",
+    "Gramel Education is a study abroad agency and company based in Abuja, Nigeria, providing international education placement, scholarships, visa assistance, and advisory services for students across Nigeria.",
   address: {
     "@type": "PostalAddress",
     streetAddress: "50, Ebitu Ukiwe Street, Jabi",

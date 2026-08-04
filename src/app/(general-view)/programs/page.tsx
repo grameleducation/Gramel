@@ -1,4 +1,5 @@
 import { ChevronDown } from "lucide-react";
+import type { Metadata } from "next";
 import ProgramCard from "@/components/ProgramCard";
 import ProgramsFilterForm, {
   ProgramsFilterOptions,
@@ -6,6 +7,12 @@ import ProgramsFilterForm, {
 } from "@/components/forms/ProgramsFilterForm";
 import pool from "@/utils/db";
 import tryCatch from "@/utils/tryCatch";
+
+export const metadata: Metadata = {
+  title: "Programs",
+  description:
+    "Search 1,500+ university programs worldwide with Gramel Education, Nigeria's trusted study abroad agency in Abuja. Filter by country, field of study, and program type.",
+};
 
 const RESULTS_LIMIT = 20;
 

@@ -29,7 +29,7 @@ const testimonials = [
   },
   {
     description:
-      "Thanks to Gramel Education, I secured a low-interest student loan that made my studies in New York possible. They also reviewed all my documents and prepped me for the embassy interview. I now mentor others trying to study abroad and I always point them to Gramel.",
+      "Thanks to Gramel Education, I secured a scholarship that made my studies in New York possible. They also reviewed all my documents and prepped me for the embassy interview. I now mentor others trying to study abroad and I always point them to Gramel.",
     image:
       "https://res.cloudinary.com/dqeqlgygu/image/upload/v1754977282/gramel/public/home/amina-busari_jh5sxl.jpg",
     alt: "medium shot beautiful woman with braids",
@@ -56,7 +56,7 @@ const testimonials = [
   },
   {
     description:
-      "Thanks to Gramel Education, I secured a low-interest student loan that made my studies in New York possible. They also reviewed all my documents and prepped me for the embassy interview. I now mentor others trying to study abroad and I always point them to Gramel.",
+      "Thanks to Gramel Education, I secured a scholarship that made my studies in New York possible. They also reviewed all my documents and prepped me for the embassy interview. I now mentor others trying to study abroad and I always point them to Gramel.",
     image:
       "https://res.cloudinary.com/dqeqlgygu/image/upload/v1754977282/gramel/public/home/amina-busari_jh5sxl.jpg",
     alt: "medium shot beautiful woman with braids",
