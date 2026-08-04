@@ -59,18 +59,20 @@ function WhyChooseUsCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.6, delay: index * 0.12, ease: "easeOut" }}
-      className={`flex h-full flex-col rounded-2xl pt-3 text-white shadow-lg transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl ${backgroundColor}`}
+      className={`flex h-full flex-col rounded-2xl p-6 text-white shadow-lg transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl ${backgroundColor}`}
     >
-      <h4 className="pr-5 pl-10 text-2xl leading-normal font-semibold">
-        {title}
-      </h4>
-      <p className="mt-3 px-10 leading-normal">{description}</p>
+      <div className="flex flex-col">
+        <h4 className="text-2xl leading-tight font-semibold">
+          {title}
+        </h4>
+        <p className="mt-3 text-sm leading-relaxed">{description}</p>
+      </div>
 
-      <div className={`m-10 mt-6 grow ${capImage ? "pt-10" : ""}`}>
+      <div className="flex grow items-end pt-8">
         {/* image container */}
         <div className="relative aspect-[324/276] w-full overflow-visible rounded-2xl">
           {capImage && (
-            <div className="absolute -top-4.5 -left-9.5 z-10 w-28">
+            <div className="absolute -top-6 -left-12 z-10 w-28">
               <Image
                 src={capImage}
                 alt="Valedictory Cap"
