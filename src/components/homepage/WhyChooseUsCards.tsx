@@ -17,8 +17,8 @@ export default function WhyChooseUsCards() {
 
       <WhyChooseUsCard
         index={1}
-        title="Complete Financial Support"
-        description="We provide comprehensive guidance on scholarships and income share agreements (ISAs)—so no matter your financial background, we'll help you find a way to fund your education."
+        title="Scholarships"
+        description="We provide advisory services on securing scholarships for exceptional students where such opportunities are available."
         mainImage="https://res.cloudinary.com/dqeqlgygu/image/upload/v1754977281/gramel/public/home/why-choose-us-image-1_b6pgdf.jpg"
         capImage="https://res.cloudinary.com/dqeqlgygu/image/upload/v1754977682/gramel/public/home/light-blue-cap_lz5mtu.png"
         backgroundColor="bg-[#1e1e1e]"
@@ -29,6 +29,7 @@ export default function WhyChooseUsCards() {
         title="Trusted Study Abroad Agency in Nigeria"
         description="Based right here in Abuja, our study abroad agents understand the Nigerian student journey firsthand, pairing local, in-person support with our global partner network."
         mainImage="https://res.cloudinary.com/dqeqlgygu/image/upload/v1754977463/gramel/public/home/gallery-student-2_dmsu3k.jpg"
+        capImage="https://res.cloudinary.com/dqeqlgygu/image/upload/v1754977682/gramel/public/home/deep-blue-cap_spvnqe.png"
         backgroundColor="bg-primary"
       />
     </div>
