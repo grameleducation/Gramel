@@ -30,7 +30,7 @@ export default function WhyChooseUsCards() {
         description="Based right here in Abuja, our study abroad agents understand the Nigerian student journey firsthand, pairing local, in-person support with our global partner network."
         mainImage="https://res.cloudinary.com/dqeqlgygu/image/upload/v1754977463/gramel/public/home/gallery-student-2_dmsu3k.jpg"
         capImage="https://res.cloudinary.com/dqeqlgygu/image/upload/v1754977682/gramel/public/home/deep-blue-cap_spvnqe.png"
-        backgroundColor="bg-primary"
+        backgroundColor="bg-primary-300"
       />
     </div>
   );
