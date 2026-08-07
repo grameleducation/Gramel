@@ -180,7 +180,7 @@ export default function SignUpForm() {
         By clicking on <strong>&ldquo;Create Account&rdquo;</strong>, you agree
         to our{" "}
         <Link
-          href="#"
+          href="/terms"
           className="font-semibold underline hover:no-underline"
           prefetch={false}
         >
@@ -188,7 +188,7 @@ export default function SignUpForm() {
         </Link>{" "}
         &amp;{" "}
         <Link
-          href="#"
+          href="/privacy"
           className="font-semibold underline hover:no-underline"
           prefetch={false}
         >

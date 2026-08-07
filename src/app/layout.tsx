@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import Providers from "@/context/Providers";
+import CookieConsentBanner from "@/components/CookieConsentBanner";
 
 import "./globals.css";
 
@@ -99,6 +100,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
         <Providers>{children}</Providers>
+        <CookieConsentBanner />
       </body>
     </html>
   );

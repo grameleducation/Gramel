@@ -130,7 +130,7 @@ export default function Footer() {
             <h5 className="font-semibold text-neutral-500">Legal</h5>
             <li>
               <Link
-                href="#"
+                href={toHref("/privacy")}
                 className="hover:text-neutral-500"
                 prefetch={false}
               >
@@ -139,11 +139,20 @@ export default function Footer() {
             </li>
             <li>
               <Link
-                href={toHref("/services")}
+                href={toHref("/terms")}
                 className="hover:text-neutral-500"
                 prefetch={false}
               >
                 Terms of Service
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={toHref("/cookie-policy")}
+                className="hover:text-neutral-500"
+                prefetch={false}
+              >
+                Cookie Policy
               </Link>
             </li>
           </ul>

@@ -153,7 +153,7 @@ export default function LoginForm() {
       <p className="text-center text-[0.625rem] text-black">
         By clicking on <strong>&ldquo;Login&rdquo;</strong>, you agree to our{" "}
         <Link
-          href="#"
+          href="/terms"
           className="font-semibold underline hover:no-underline"
           prefetch={false}
         >
@@ -161,7 +161,7 @@ export default function LoginForm() {
         </Link>{" "}
         &amp;{" "}
         <Link
-          href="#"
+          href="/privacy"
           className="font-semibold underline hover:no-underline"
           prefetch={false}
         >
