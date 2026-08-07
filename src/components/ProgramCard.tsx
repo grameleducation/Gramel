@@ -51,7 +51,7 @@ export default function ProgramCard({
             </p>
           </div>
           <Link
-            href="#"
+            href="/services/international-admissions"
             className="rounded-[0.625rem] bg-primary px-6 py-4 text-center font-semibold text-white duration-300 hover:bg-primary-300 active:bg-primary max-sm:text-sm"
             prefetch={false}
           >

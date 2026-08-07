@@ -90,6 +90,16 @@ export default async function HomePage() {
         <FadeIn delay={0.15} className="mt-16">
           <EmbeddedSearch />
         </FadeIn>
+
+        <FadeIn delay={0.2} className="mt-8 text-center">
+          <Link
+            href="/programs"
+            prefetch={false}
+            className="inline-block rounded-2xl border-2 border-primary-300 px-8 py-3 font-semibold text-primary-300 duration-300 hover:bg-primary-300 hover:text-white"
+          >
+            Browse Our Full Program Catalog
+          </Link>
+        </FadeIn>
       </section>
 
       {/* === why choose us === */}
