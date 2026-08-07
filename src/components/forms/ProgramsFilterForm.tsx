@@ -32,7 +32,7 @@ export default function ProgramsFilterForm({
     <form
       action="/programs"
       method="get"
-      className="order-1 min-w-full space-y-4 pb-6 lg:order-2 lg:p-6"
+      className="order-1 min-w-full space-y-4 pb-6 lg:order-2 lg:sticky lg:top-6 lg:max-h-[calc(100vh-3rem)] lg:overflow-y-auto lg:p-6"
     >
       <h3 className="rounded-[0.625rem] bg-primary p-4 text-2xl font-semibold text-white">
         Filter

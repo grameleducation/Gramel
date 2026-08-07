@@ -1,10 +1,15 @@
+import Link from "next/link";
 import { Building2, MapPin, Users } from "lucide-react";
 import type { ExternalSchool } from "@/lib/externalSchoolSearch";
 
 // Supplementary results from free, live school-directory APIs (Hipolabs'
 // global university list + the US Dept. of Education's College Scorecard),
 // shown alongside our own curated `programs` listings so a search doesn't
-// come up empty just because a school isn't in our database yet.
+// come up empty just because a school isn't in our database yet. These are
+// intentionally a distinct, lighter-weight tier: we don't have confirmed
+// tuition, fees, or an application relationship with these schools the way
+// we do for the programs above, so there's no "Start Application" here --
+// just a pointer to book a consultation instead.
 export default function ExternalSchoolResults({
   schools,
 }: {
@@ -13,14 +18,15 @@ export default function ExternalSchoolResults({
   if (schools.length === 0) return null;
 
   return (
-    <div className="mt-10 space-y-4">
+    <div className="mt-10 space-y-4 border-t border-[#e0e0e0] pt-10">
       <div>
         <h2 className="text-lg font-semibold text-black">
-          More Schools Matching Your Search
+          Other Schools Worldwide
         </h2>
         <p className="text-sm text-neutral-400">
           Pulled live from public university directories -- not yet in our
-          program database. Book a consultation to ask about applying here.
+          curated program catalog, so we don&apos;t have confirmed tuition or
+          fees for these. Our team can still help you apply.
         </p>
       </div>
 
@@ -67,6 +73,14 @@ export default function ExternalSchoolResults({
           </div>
         ))}
       </div>
+
+      <Link
+        href="/#consultation-form"
+        prefetch={false}
+        className="inline-block rounded-2xl border-2 border-primary-300 px-6 py-2.5 text-sm font-semibold text-primary-300 duration-300 hover:bg-primary-300 hover:text-white"
+      >
+        Book a Free Consultation to Ask About These Schools
+      </Link>
     </div>
   );
 }

@@ -181,6 +181,13 @@ export default async function ProgramsPage({
         <div className="grid gap-10 lg:grid-cols-[3fr_2fr] lg:gap-9">
           {/* Programs container */}
           <div className="order-2 min-w-full lg:order-1">
+            <p className="pt-3 text-sm text-neutral-400 max-sm:text-xs">
+              Below is our curated program catalog, with confirmed tuition,
+              fees, and intake dates. Search by school name or destination to
+              also pull in more universities worldwide, even ones not yet in
+              our catalog.
+            </p>
+
             {/* Heading container */}
             <div className="flex items-center justify-between py-3 max-sm:text-sm">
               <p className="text-black">
