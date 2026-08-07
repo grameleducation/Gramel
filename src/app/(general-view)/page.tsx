@@ -12,7 +12,6 @@ import CTASection from "@/components/CTASection";
 import PolygonGallery from "@/components/homepage/PolygonGallery";
 import ApplyBoardIframe from "@/components/homepage/ApplyBoardIframe";
 import EmbeddedSearch from "./EmbeddedSearch";
-import ScholarshipSearchSection from "@/components/homepage/ScholarshipSearchSection";
 import FadeIn from "@/components/motion/FadeIn";
 import type { Metadata } from "next";
 
@@ -168,8 +167,32 @@ export default async function HomePage() {
       </section>
 
 
-      {/* === SCHOLARSHIPS & FUNDING === */}
-      <ScholarshipSearchSection />
+      {/* === SCHOLARSHIPS & FUNDING TEASER === */}
+      <section className="mx-auto max-w-screen-2xl px-6 md:px-12 xl:px-20">
+        <FadeIn>
+          <div className="mx-auto flex flex-col items-center gap-6 rounded-3xl bg-gradient-to-r from-primary-300 to-primary p-10 text-center text-white md:p-16">
+            <div className="flex items-center gap-3">
+              <Image src={gramel_white_icon} alt="Gramel Icon" className="h-6" />
+              <p className="text-lg leading-normal">SCHOLARSHIPS & FUNDING</p>
+            </div>
+            <h2 className="max-w-xl text-4xl leading-tight font-bold lg:text-5xl">
+              Find Scholarships and Funding Opportunities
+            </h2>
+            <p className="max-w-2xl text-[#E6E6EB] lg:text-lg">
+              Explore merit-based, need-based, and regional scholarships to
+              make your study abroad journey more affordable.
+            </p>
+            <Link
+              href="/scholarships"
+              prefetch={false}
+              className="rounded-2xl bg-white px-8 py-3 font-semibold text-primary-300 duration-300 hover:bg-neutral-50"
+            >
+              Search Scholarships
+            </Link>
+          </div>
+        </FadeIn>
+      </section>
+
       {/* === OUR SERVICES === */}
       <section className="mx-auto my-35 max-w-screen-2xl px-6 md:px-12 xl:px-20">
         {/* our services heading */}

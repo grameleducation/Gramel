@@ -29,6 +29,8 @@ const navLinks = [
   { href: "/contact", label: "Contact Us" },
 ];
 
+const ASSIST_URL = "https://assist.grameleducation.com";
+
 // On the assist subdomain, every route except /assist itself belongs to
 // the main site and doesn't exist there -- send those links back to the
 // main domain instead of letting them 404 under assist's rewrite. Detected
@@ -43,10 +45,17 @@ function useMainSiteHref() {
     );
   }, []);
 
-  return (path: string) =>
+  const toHref = (path: string) =>
     isAssist && path !== "/assist"
       ? `${client_env.NEXT_PUBLIC_BASE_URL}${path}`
       : path;
+
+  // The Assist nav link should always land on the assist subdomain's own
+  // URL, not the /assist path on the main domain -- except when already on
+  // that subdomain, where "/assist" is home and just needs the leading path.
+  const assistHref = isAssist ? "/assist" : ASSIST_URL;
+
+  return { toHref, isAssist, assistHref };
 }
 
 // Service links for hover card
@@ -66,7 +75,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const { user, isUserLoading, isLoggingOut, handleLogout } = useAuthContext();
-  const toHref = useMainSiteHref();
+  const { toHref, assistHref } = useMainSiteHref();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -129,11 +138,12 @@ export default function Navbar() {
                 </li>
               );
             }
+            const href = link.href === "/assist" ? assistHref : toHref(link.href);
             return (
               <li key={index}>
                 <Link
                   prefetch={false}
-                  href={toHref(link.href)}
+                  href={href}
                   className={`rounded-2xl px-5 py-2 duration-300 ${pathname === link.href ? "bg-primary-300/20" : "hover:bg-primary-300/10"}`}
                 >
                   {link.label}
@@ -264,7 +274,7 @@ export default function Navbar() {
                 <li key={index}>
                   <Link
                     prefetch={false}
-                    href={toHref(link.href)}
+                    href={link.href === "/assist" ? assistHref : toHref(link.href)}
                     className="block duration-300 hover:text-neutral-300"
                     onClick={toggleMenu}
                   >
@@ -291,7 +301,7 @@ function MobileScreenLoginDropDown({
   const triggerRef = useRef<HTMLButtonElement>(null);
   const [triggerWidth, setTriggerWidth] = useState<number | null>(null);
   const { user, isUserLoading, isLoggingOut, handleLogout } = useAuthContext();
-  const toHref = useMainSiteHref();
+  const { toHref } = useMainSiteHref();
 
   // Measure trigger width after layout
   useEffect(() => {

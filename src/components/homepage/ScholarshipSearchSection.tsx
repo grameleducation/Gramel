@@ -67,11 +67,9 @@ function filterScholarships(term: string, country: string) {
 export default function ScholarshipSearchSection({
   initialSearch = "",
   initialCountry = "",
-  showHeader = true,
 }: {
   initialSearch?: string;
   initialCountry?: string;
-  showHeader?: boolean;
 }) {
   const [searchTerm, setSearchTerm] = useState(initialSearch);
   const [selectedCountry, setSelectedCountry] = useState(initialCountry);
@@ -100,24 +98,22 @@ export default function ScholarshipSearchSection({
     >
       <div className="space-y-8">
         {/* Header */}
-        {showHeader && (
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <Image src={gramel_icon} alt="Gramel Icon" className="h-6" />
-              <p className="text-lg leading-normal text-primary-300">
-                SCHOLARSHIPS & FUNDING
-              </p>
-            </div>
-            <h2 className="text-4xl font-bold text-primary lg:text-5xl">
-              Find Scholarships and Funding Opportunities
-            </h2>
-            <p className="text-lg text-neutral-300">
-              Explore thousands of scholarship opportunities to make your
-              study abroad journey more affordable. Our database includes
-              merit-based, need-based, and regional scholarships.
+        <div className="space-y-4">
+          <div className="flex items-center gap-3">
+            <Image src={gramel_icon} alt="Gramel Icon" className="h-6" />
+            <p className="text-lg leading-normal text-primary-300">
+              SCHOLARSHIPS & FUNDING
             </p>
           </div>
-        )}
+          <h2 className="text-4xl font-bold text-primary lg:text-5xl">
+            Find Scholarships and Funding Opportunities
+          </h2>
+          <p className="text-lg text-neutral-300">
+            Explore thousands of scholarship opportunities to make your study
+            abroad journey more affordable. Our database includes merit-based,
+            need-based, and regional scholarships.
+          </p>
+        </div>
 
         {/* Search Bar */}
         <div className="space-y-4 rounded-2xl bg-white p-6 shadow-lg">
