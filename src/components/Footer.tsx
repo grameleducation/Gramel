@@ -66,24 +66,6 @@ export default function Footer() {
                 Careers
               </Link>
             </li>
-            <li>
-              <Link
-                href="#"
-                className="hover:text-neutral-500"
-                prefetch={false}
-              >
-                Schools
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={toHref("/programs")}
-                className="hover:text-neutral-500"
-                prefetch={false}
-              >
-                Programs
-              </Link>
-            </li>
           </ul>
 
           <ul className="space-y-3">
@@ -99,7 +81,16 @@ export default function Footer() {
             </li>
             <li>
               <Link
-                href="#"
+                href={toHref("/scholarships")}
+                className="hover:text-neutral-500"
+                prefetch={false}
+              >
+                Scholarships
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={toHref("/services/international-admissions")}
                 className="hover:text-neutral-500"
                 prefetch={false}
               >
@@ -113,15 +104,6 @@ export default function Footer() {
                 prefetch={false}
               >
                 Student Portal
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="#"
-                className="hover:text-neutral-500"
-                prefetch={false}
-              >
-                Events
               </Link>
             </li>
           </ul>
