@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       new URL("https://res.cloudinary.com/dqeqlgygu/image/upload/**"),
       new URL("https://upload.wikimedia.org/wikipedia/commons/**"),
+      { protocol: "https", hostname: "images.unsplash.com", pathname: "/**" },
     ],
   },
 };

@@ -46,27 +46,41 @@ const SAMPLE_SCHOLARSHIPS: Scholarship[] = [
   },
 ];
 
-export default function ScholarshipSearchSection() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedCountry, setSelectedCountry] = useState("");
-  const [results, setResults] = useState<Scholarship[]>(SAMPLE_SCHOLARSHIPS);
+function filterScholarships(term: string, country: string) {
+  let filtered = SAMPLE_SCHOLARSHIPS;
+
+  if (term) {
+    filtered = filtered.filter(
+      (s) =>
+        s.name.toLowerCase().includes(term.toLowerCase()) ||
+        s.description.toLowerCase().includes(term.toLowerCase()),
+    );
+  }
+
+  if (country) {
+    filtered = filtered.filter((s) => s.countries.includes(country));
+  }
+
+  return filtered;
+}
+
+export default function ScholarshipSearchSection({
+  initialSearch = "",
+  initialCountry = "",
+  showHeader = true,
+}: {
+  initialSearch?: string;
+  initialCountry?: string;
+  showHeader?: boolean;
+}) {
+  const [searchTerm, setSearchTerm] = useState(initialSearch);
+  const [selectedCountry, setSelectedCountry] = useState(initialCountry);
+  const [results, setResults] = useState<Scholarship[]>(() =>
+    filterScholarships(initialSearch, initialCountry),
+  );
 
   const handleSearch = (term: string, country: string) => {
-    let filtered = SAMPLE_SCHOLARSHIPS;
-
-    if (term) {
-      filtered = filtered.filter(
-        (s) =>
-          s.name.toLowerCase().includes(term.toLowerCase()) ||
-          s.description.toLowerCase().includes(term.toLowerCase()),
-      );
-    }
-
-    if (country) {
-      filtered = filtered.filter((s) => s.countries.includes(country));
-    }
-
-    setResults(filtered);
+    setResults(filterScholarships(term, country));
   };
 
   const handleSearchChange = (value: string) => {
@@ -80,25 +94,30 @@ export default function ScholarshipSearchSection() {
   };
 
   return (
-    <section className="mx-auto max-w-screen-2xl px-6 py-16 md:px-12 xl:px-20">
+    <section
+      id="scholarships"
+      className="mx-auto max-w-screen-2xl scroll-mt-24 px-6 py-16 md:px-12 xl:px-20"
+    >
       <div className="space-y-8">
         {/* Header */}
-        <div className="space-y-4">
-          <div className="flex items-center gap-3">
-            <Image src={gramel_icon} alt="Gramel Icon" className="h-6" />
-            <p className="text-lg leading-normal text-primary-300">
-              SCHOLARSHIPS & FUNDING
+        {showHeader && (
+          <div className="space-y-4">
+            <div className="flex items-center gap-3">
+              <Image src={gramel_icon} alt="Gramel Icon" className="h-6" />
+              <p className="text-lg leading-normal text-primary-300">
+                SCHOLARSHIPS & FUNDING
+              </p>
+            </div>
+            <h2 className="text-4xl font-bold text-primary lg:text-5xl">
+              Find Scholarships and Funding Opportunities
+            </h2>
+            <p className="text-lg text-neutral-300">
+              Explore thousands of scholarship opportunities to make your
+              study abroad journey more affordable. Our database includes
+              merit-based, need-based, and regional scholarships.
             </p>
           </div>
-          <h2 className="text-4xl font-bold text-primary lg:text-5xl">
-            Find Scholarships and Funding Opportunities
-          </h2>
-          <p className="text-lg text-neutral-300">
-            Explore thousands of scholarship opportunities to make your study
-            abroad journey more affordable. Our database includes merit-based,
-            need-based, and regional scholarships.
-          </p>
-        </div>
+        )}
 
         {/* Search Bar */}
         <div className="space-y-4 rounded-2xl bg-white p-6 shadow-lg">

@@ -17,12 +17,14 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { RequirePermission } from "./auth/RequirePermission";
 import { UserActions } from "@/lib/permissions/role";
 import client_env from "@/utils/env.client";
+import NavSearch from "./NavSearch";
 
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about-us", label: "About Us" },
   { href: "/services", label: "Services" },
   { href: "/programs", label: "Programs" },
+  { href: "/scholarships", label: "Scholarships" },
   { href: "/assist", label: "Assist" },
   { href: "/contact", label: "Contact Us" },
 ];
@@ -140,6 +142,9 @@ export default function Navbar() {
             );
           })}
         </ul>
+
+        {/* search */}
+        <NavSearch />
 
         {/* desktop login button */}
         {isUserLoading ? (

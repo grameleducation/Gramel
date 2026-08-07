@@ -50,7 +50,9 @@ export async function proxy(request: NextRequest) {
   // Only gate paths that are actually login-protected. Everything else
   // (including nonexistent/mistyped URLs) falls through to Next.js, which
   // renders the real 404 page instead of a misleading login redirect.
-  const protectedPrefixes = ["/dashboard", "/student-profile", "/programs"];
+  // NOTE: /programs is the public school/program search page (linked in the
+  // main nav for signed-out visitors) and must stay public.
+  const protectedPrefixes = ["/dashboard", "/student-profile"];
   const isProtected = protectedPrefixes.some(
     (p) => pathname === p || pathname.startsWith(`${p}/`),
   );
