@@ -4,50 +4,20 @@ import { useState } from "react";
 import { Search, Filter, Zap } from "lucide-react";
 import Image from "next/image";
 import gramel_icon from "../../../public/gramel-icon.png";
+import { scholarshipsData, type Scholarship } from "@/data/scholarships";
 
-interface Scholarship {
-  id: string;
-  name: string;
-  amount: string;
-  description: string;
-  countries: string[];
-  eligibility: string;
-  deadline: string;
-}
-
-// Sample scholarship data - in production, this would come from an API
-const SAMPLE_SCHOLARSHIPS: Scholarship[] = [
-  {
-    id: "1",
-    name: "Commonwealth Scholarship",
-    amount: "Full Tuition",
-    description: "Fully funded scholarships for Commonwealth nations",
-    countries: ["Canada", "UK", "Australia"],
-    eligibility: "First-class degree",
-    deadline: "2024-10-31",
-  },
-  {
-    id: "2",
-    name: "Chevening Scholarship",
-    amount: "Up to £20,000",
-    description: "UK Government funded scholarships for leaders",
-    countries: ["United Kingdom"],
-    eligibility: "2+ years professional experience",
-    deadline: "2024-11-15",
-  },
-  {
-    id: "3",
-    name: "Fulbright Scholarship",
-    amount: "Full Coverage",
-    description: "US-based scholarships for international students",
-    countries: ["United States"],
-    eligibility: "Academic excellence required",
-    deadline: "2024-12-01",
-  },
+const FILTER_COUNTRIES = [
+  "United States",
+  "United Kingdom",
+  "Canada",
+  "Australia",
+  "Germany",
+  "Ireland",
+  "New Zealand",
 ];
 
 function filterScholarships(term: string, country: string) {
-  let filtered = SAMPLE_SCHOLARSHIPS;
+  let filtered = scholarshipsData;
 
   if (term) {
     filtered = filtered.filter(
@@ -137,11 +107,11 @@ export default function ScholarshipSearchSection({
                 className="w-full rounded-lg border border-neutral-200 bg-neutral-50 py-3 pl-10 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary-300"
               >
                 <option value="">Filter by country...</option>
-                <option value="United States">United States</option>
-                <option value="United Kingdom">United Kingdom</option>
-                <option value="Canada">Canada</option>
-                <option value="Australia">Australia</option>
-                <option value="Germany">Germany</option>
+                {FILTER_COUNTRIES.map((country) => (
+                  <option key={country} value={country}>
+                    {country}
+                  </option>
+                ))}
               </select>
             </div>
 

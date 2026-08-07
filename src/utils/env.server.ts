@@ -25,6 +25,11 @@ const envSchema = z.object({
 
   // better-auth (optional - assist has no auth)
   BETTER_AUTH_SECRET: z.string().trim().min(1).optional(),
+
+  // College Scorecard (optional - falls back to the public DEMO_KEY, which
+  // works with no signup but has a low rate limit; get a free key at
+  // https://api.data.gov/signup/ for real usage)
+  COLLEGE_SCORECARD_API_KEY: z.string().trim().min(1).optional(),
 });
 
 function validateEnv() {

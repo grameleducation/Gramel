@@ -5,6 +5,8 @@ import ProgramsFilterForm, {
   ProgramsFilterOptions,
   ProgramsFilterValues,
 } from "@/components/forms/ProgramsFilterForm";
+import ExternalSchoolResults from "@/components/programpage/ExternalSchoolResults";
+import { searchExternalSchools } from "@/lib/externalSchoolSearch";
 import pool from "@/utils/db";
 import tryCatch from "@/utils/tryCatch";
 
@@ -166,10 +168,12 @@ export default async function ProgramsPage({
     field_of_study: params.field_of_study || undefined,
   };
 
-  const [filterOptions, { programs, total }] = await Promise.all([
-    fetchFilterOptions(),
-    fetchPrograms(filters),
-  ]);
+  const [filterOptions, { programs, total }, externalSchools] =
+    await Promise.all([
+      fetchFilterOptions(),
+      fetchPrograms(filters),
+      searchExternalSchools(filters.search, filters.country),
+    ]);
 
   return (
     <main className="pt-14">
@@ -232,6 +236,8 @@ export default async function ProgramsPage({
                 ))}
               </div>
             )}
+
+            <ExternalSchoolResults schools={externalSchools} />
           </div>
 
           {/* Filters */}
