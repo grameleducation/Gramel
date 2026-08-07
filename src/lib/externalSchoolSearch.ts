@@ -87,7 +87,18 @@ async function fetchScorecardSchools(name?: string): Promise<ExternalSchool[]> {
   );
   if (parseError || !Array.isArray(data.results)) return [];
 
-  return data.results.map((r) => ({
+  // Scorecard's school.name filter does a fuzzy/tokenized match, not a
+  // substring match -- searching "Computer Science" can return something
+  // like "Regis University" with no obvious connection to the query. Only
+  // keep results that actually contain the search term, so a subject/field
+  // search (which this section isn't built to handle) correctly yields no
+  // external results instead of a confusing unrelated school.
+  const lowerName = name.toLowerCase();
+  const relevantResults = data.results.filter((r) =>
+    r["school.name"]?.toLowerCase().includes(lowerName),
+  );
+
+  return relevantResults.map((r) => ({
     name: r["school.name"],
     country: "United States",
     website: r["school.school_url"],

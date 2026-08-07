@@ -210,6 +210,14 @@ export default async function ProgramsPage({
                 <p className="mt-2 text-sm text-neutral-300">
                   Try adjusting or clearing your search criteria.
                 </p>
+                {filters.search && externalSchools.length === 0 && (
+                  <p className="mx-auto mt-4 max-w-md text-sm text-neutral-400">
+                    Tip: &quot;{filters.search}&quot; looks like a subject
+                    rather than a school name. Try searching an institution
+                    name instead (e.g. &quot;University of Toronto&quot;) to
+                    pull in live results from global school directories.
+                  </p>
+                )}
               </div>
             ) : (
               <div className="mt-6 space-y-6">
