@@ -242,6 +242,95 @@ Gramel Education
 `,
 };
 
+// Welcome onboarding email for consultation booking
+export const welcomeOnboarding: EmailTemplate<{ name: string }> = {
+  subject: "Welcome to Your Study Abroad Journey - Your Consultation is Confirmed!",
+  text: ({ name }) => `
+Welcome to Gramel Education, ${name}!
+
+Thank you for booking a consultation with us. We're excited to help you start your study abroad journey!
+
+What to Expect:
+• Your dedicated education advisor will review your consultation details
+• We'll discuss your academic goals, preferences, and timeline
+• You'll learn about scholarships, programs, and funding options
+• Next steps will be clearly outlined for your application journey
+
+Next Steps:
+A member of our team will reach out to you shortly to confirm your consultation time. Keep an eye on your email and phone for communication from us.
+
+In the meantime, explore these resources:
+• Search our 1,500+ partner schools
+• Explore scholarship opportunities
+• Read student success stories on our website
+
+Questions?
+Feel free to reply to this email or contact us:
+• Phone: 07041041810
+• Email: info@grameleducation.com
+• Visit: www.grameleducation.com
+
+We're here to support every step of your journey!
+
+Best regards,
+The Gramel Education Team
+Empowering Students. Unlocking Global Opportunities.`,
+  html: ({ name }) => `
+    <div style="font-family: ${styles.fonts.main}; max-width: 600px; margin: 0 auto; padding: 20px; background: ${styles.colors.background}; border: 1px solid ${styles.colors.border}; border-radius: 5px;">
+      <div style="text-align: center; margin-bottom: 30px;">
+        <h1 style="color: ${styles.colors.primary}; margin: 0; font-size: 28px;">Welcome to Your Study Abroad Journey!</h1>
+      </div>
+
+      <div style="color: ${styles.colors.text}; font-size: 16px; line-height: 1.6; margin-bottom: 24px;">
+        <p>Hi ${name},</p>
+        <p>Thank you for booking a consultation with us. We're excited to help you start your study abroad journey!</p>
+      </div>
+
+      <div style="background-color: #f9f9f9; border-left: 4px solid ${styles.colors.primary}; padding: 16px; margin-bottom: 24px; border-radius: 4px;">
+        <h3 style="color: ${styles.colors.primary}; margin-top: 0;">What to Expect:</h3>
+        <ul style="color: ${styles.colors.text}; font-size: 15px; line-height: 1.8;">
+          <li>Your dedicated education advisor will review your consultation details</li>
+          <li>We'll discuss your academic goals, preferences, and timeline</li>
+          <li>You'll learn about scholarships, programs, and funding options</li>
+          <li>Next steps will be clearly outlined for your application journey</li>
+        </ul>
+      </div>
+
+      <div style="background-color: #e8f4f8; border-left: 4px solid #62a9dc; padding: 16px; margin-bottom: 24px; border-radius: 4px;">
+        <h3 style="color: #09225a; margin-top: 0;">Next Steps:</h3>
+        <p style="color: ${styles.colors.text}; font-size: 15px; line-height: 1.6;">A member of our team will reach out to you shortly to confirm your consultation time. Keep an eye on your email and phone for communication from us.</p>
+      </div>
+
+      <div style="background-color: #f0f0f0; padding: 16px; margin-bottom: 24px; border-radius: 4px;">
+        <h3 style="color: ${styles.colors.primary}; margin-top: 0;">In the Meantime:</h3>
+        <ul style="color: ${styles.colors.text}; font-size: 15px; line-height: 1.8;">
+          <li>Search our 1,500+ partner schools</li>
+          <li>Explore scholarship opportunities</li>
+          <li>Read student success stories on our website</li>
+        </ul>
+      </div>
+
+      <div style="background-color: #f5f5f5; padding: 16px; margin-bottom: 24px; border-radius: 4px;">
+        <h3 style="color: ${styles.colors.primary}; margin-top: 0;">Questions?</h3>
+        <p style="color: ${styles.colors.text}; font-size: 15px; line-height: 1.6;">Feel free to reply to this email or contact us:</p>
+        <ul style="color: ${styles.colors.text}; font-size: 15px; line-height: 1.8;">
+          <li><strong>Phone:</strong> 07041041810</li>
+          <li><strong>Email:</strong> info@grameleducation.com</li>
+          <li><strong>Website:</strong> www.grameleducation.com</li>
+        </ul>
+      </div>
+
+      <div style="color: ${styles.colors.text}; font-size: 15px; line-height: 1.6; margin-bottom: 24px;">
+        <p>We're here to support every step of your journey!</p>
+      </div>
+
+      <div style="margin-top: 30px; padding-top: 16px; border-top: 1px solid ${styles.colors.border}; color: ${styles.colors.text}; font-size: 14px; text-align: center;">
+        <p><strong>The Gramel Education Team</strong><br>Empowering Students. Unlocking Global Opportunities.</p>
+      </div>
+    </div>
+  `,
+};
+
 // New job application received (admin notification)
 export const jobApplicationReceived: EmailTemplate<{
   roleTitle: string;

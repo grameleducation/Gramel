@@ -1,6 +1,6 @@
 "use server";
 
-import { contactPageMessage } from "@/lib/emailTemplates";
+import { contactPageMessage, welcomeOnboarding } from "@/lib/emailTemplates";
 import { contactFormSchema } from "@/lib/zodSchemas";
 import transporter from "@/utils/emailTransporter";
 import server_env from "@/utils/env.server";
@@ -46,13 +46,23 @@ export async function sendContactPageMessageAction(
         message: "An error occurred...",
       };
 
-    // Send email
+    // Send email to admin
     await transporter.sendMail({
       from: server_env.SMTP_USER,
       to: server_env.SMTP_USER, // Send to yourself
       subject: validatedData.subject || contactPageMessage.subject,
       text: contactPageMessage.text(validatedData),
       html: contactPageMessage.html(validatedData),
+    });
+
+    // Send welcome email to user
+    const nameFromEmail = validatedData.name || validatedData.email.split("@")[0];
+    await transporter.sendMail({
+      from: server_env.SMTP_USER,
+      to: validatedData.email,
+      subject: welcomeOnboarding.subject,
+      text: welcomeOnboarding.text({ name: nameFromEmail }),
+      html: welcomeOnboarding.html({ name: nameFromEmail }),
     });
 
     return { success: true };

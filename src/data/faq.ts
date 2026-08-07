@@ -15,13 +15,13 @@ export const faqData = [
       "No, we support students at all levels—from high school to university and beyond. Whether you're looking for undergraduate, graduate, or vocational programs, we can help you find the right fit.",
   },
   {
-    question: "Can you help with financial aid or funding options?",
-    answer:
-      "Yes, we provide comprehensive financial support options. We help students secure income share agreements (ISAs) and scholarships to make studying abroad more affordable.",
-  },
-  {
     question: "Can Gramel help with visa processing?",
     answer:
       "Absolutely! We provide end-to-end visa support, including document preparation, interview coaching, and application submission. Our team ensures you have everything you need for a successful visa application.",
+  },
+  {
+    question: "How does the application timeline work?",
+    answer:
+      "Most applications take 3-6 months from start to finish, depending on your program and destination. We'll provide you with a personalized timeline during your consultation and keep you on track every step of the way.",
   },
 ];

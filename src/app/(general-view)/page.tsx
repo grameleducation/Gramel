@@ -12,6 +12,7 @@ import CTASection from "@/components/CTASection";
 import PolygonGallery from "@/components/homepage/PolygonGallery";
 import ApplyBoardIframe from "@/components/homepage/ApplyBoardIframe";
 import EmbeddedSearch from "./EmbeddedSearch";
+import ScholarshipSearchSection from "@/components/homepage/ScholarshipSearchSection";
 import FadeIn from "@/components/motion/FadeIn";
 import type { Metadata } from "next";
 
@@ -166,6 +167,9 @@ export default async function HomePage() {
         </FadeIn>
       </section>
 
+
+      {/* === SCHOLARSHIPS & FUNDING === */}
+      <ScholarshipSearchSection />
       {/* === OUR SERVICES === */}
       <section className="mx-auto my-35 max-w-screen-2xl px-6 md:px-12 xl:px-20">
         {/* our services heading */}
