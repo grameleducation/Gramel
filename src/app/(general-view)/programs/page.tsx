@@ -188,53 +188,56 @@ export default async function ProgramsPage({
         <div className="grid gap-10 lg:grid-cols-[3fr_2fr] lg:gap-9">
           {/* Programs container */}
           <div className="order-2 min-w-full lg:order-1">
-            <p className="pt-3 text-sm text-neutral-400 max-sm:text-xs">
-              Below is our curated program catalog, with confirmed tuition,
-              fees, and intake dates. Search by school name or destination to
-              also pull in more universities worldwide, even ones not yet in
-              our catalog.
-            </p>
+            <div className="mb-6 rounded-2xl bg-gradient-to-r from-primary-300/5 to-primary-300/10 p-4 sm:p-6">
+              <p className="text-sm text-neutral-600 max-sm:text-xs">
+                Our <strong className="text-black">curated program catalog</strong> features
+                confirmed tuition, fees, and intake dates. Search by school
+                name or destination to explore more universities worldwide.
+              </p>
+            </div>
 
             {/* Heading container */}
-            <div className="flex items-center justify-between py-3 max-sm:text-sm">
-              <p className="text-black">
+            <div className="flex flex-col items-start justify-between gap-4 py-4 sm:flex-row sm:items-center max-sm:text-sm">
+              <p className="font-medium text-black">
                 {total === 0
                   ? "No programs found"
-                  : `Results 1 - ${programs.length}`}
-                <br className="sm:hidden" />
-                {total > 0 && ` (out of ${total} program${total === 1 ? "" : "s"})`}
+                  : `Showing ${programs.length}`}
+                {total > 0 && <span className="text-neutral-500"> of {total} program{total === 1 ? "" : "s"}</span>}
               </p>
 
               {/* sort container */}
-              <div className="flex items-center gap-3">
-                <span className="font-semibold">Sort</span>
-                <button className="flex items-center gap-2.5 rounded-2xl border border-black p-[0.875rem] px-3 duration-300 hover:border-neutral-300 hover:text-neutral-300 sm:px-4">
-                  Default
-                  <ChevronDown className="shrink-0 text-xl" />
+              <div className="flex items-center gap-2.5">
+                <span className="text-sm font-medium text-neutral-600">Sort by:</span>
+                <button className="flex items-center gap-2 rounded-xl border border-neutral-200 bg-white px-4 py-2.5 text-sm font-medium text-black transition-all duration-300 hover:border-primary-300 hover:bg-primary-300/5 max-sm:text-xs sm:px-4">
+                  Newest
+                  <ChevronDown className="size-4 shrink-0" />
                 </button>
               </div>
             </div>
 
             {/* programs list */}
             {programs.length === 0 ? (
-              <div className="mt-6 rounded-3xl border-2 border-dashed border-[#e0e0e0] bg-[#f9f9f9] py-16 text-center">
-                <p className="text-lg text-neutral-300">
-                  No programs match your filters.
+              <div className="mt-8 rounded-2xl border-2 border-dashed border-neutral-200 bg-neutral-50 px-6 py-16 text-center sm:px-8">
+                <div className="mb-3 flex justify-center">
+                  <div className="rounded-full bg-neutral-100 p-3">
+                    <ChevronDown className="size-6 text-neutral-300" />
+                  </div>
+                </div>
+                <p className="text-lg font-medium text-neutral-700">
+                  No programs match your filters
                 </p>
-                <p className="mt-2 text-sm text-neutral-300">
-                  Try adjusting or clearing your search criteria.
+                <p className="mt-2 text-sm text-neutral-500">
+                  Try adjusting your search criteria or exploring our full catalog below.
                 </p>
                 {filters.search && externalSchools.length === 0 && (
-                  <p className="mx-auto mt-4 max-w-md text-sm text-neutral-400">
-                    Tip: &quot;{filters.search}&quot; looks like a subject
-                    rather than a school name. Try searching an institution
-                    name instead (e.g. &quot;University of Toronto&quot;) to
-                    pull in live results from global school directories.
+                  <p className="mx-auto mt-4 max-w-md text-sm text-neutral-500">
+                    💡 <strong>&quot;{filters.search}&quot;</strong> looks like a subject.
+                    Try searching an institution name instead (e.g. <strong>&quot;University of Toronto&quot;</strong>) to find more results.
                   </p>
                 )}
               </div>
             ) : (
-              <div className="mt-6 space-y-6">
+              <div className="mt-8 space-y-5">
                 {programs.map((program) => (
                   <ProgramCard
                     key={program.id}

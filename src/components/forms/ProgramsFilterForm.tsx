@@ -32,29 +32,34 @@ export default function ProgramsFilterForm({
     <form
       action="/programs"
       method="get"
-      className="order-1 min-w-full space-y-4 pb-6 lg:order-2 lg:sticky lg:top-6 lg:max-h-[calc(100vh-3rem)] lg:overflow-y-auto lg:p-6"
+      className="order-1 min-w-full space-y-5 pb-6 lg:order-2 lg:sticky lg:top-6 lg:max-h-[calc(100vh-3rem)] lg:overflow-y-auto lg:rounded-2xl lg:bg-white lg:p-7 lg:shadow-sm"
     >
-      <h3 className="rounded-[0.625rem] bg-primary p-4 text-2xl font-semibold text-white">
-        Filter
-      </h3>
+      <div>
+        <h3 className="text-2xl font-bold text-black">
+          Find Your Program
+        </h3>
+        <p className="mt-1 text-sm text-neutral-500">
+          Search and filter from 1,500+ programs worldwide
+        </p>
+      </div>
 
       <input
         type="text"
         name="search"
         defaultValue={defaultValues.search}
         placeholder="What would you like to study?"
-        className="block w-full rounded-xl border border-transparent bg-[#EFEFEF] p-4 text-neutral-500 shadow-sm transition-all duration-200 placeholder:text-sm placeholder:text-[#626060] hover:ring-3 hover:ring-[#62A9DC]/50 focus:ring-3 focus:ring-[#62A9DC] focus:outline-none"
+        className="block w-full rounded-xl border border-neutral-200 bg-white p-3.5 text-sm text-neutral-700 shadow-sm transition-all duration-200 placeholder:text-neutral-400 hover:border-neutral-300 focus:border-primary-300 focus:ring-2 focus:ring-primary-300/20 focus:outline-none"
       />
 
-      <div className="space-y-2.5">
-        <h4 className="font-semibold text-black">Quick Location</h4>
+      <div className="space-y-3">
+        <h4 className="text-sm font-semibold text-neutral-900">Quick Destinations</h4>
 
         <QuickLocationButtons
           countryInputId="programs-filter-country"
           activeCountry={defaultValues.country}
         />
       </div>
-      <hr className="bg-[#7F7F7F]" />
+      <div className="border-t border-neutral-100" />
 
       <div className="space-y-4">
         <SearchableSelect
@@ -77,12 +82,12 @@ export default function ProgramsFilterForm({
           placeholder="Institution"
         />
 
-        <div className="flex flex-col gap-4 sm:flex-row lg:flex-col xl:flex-row">
+        <div className="flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
           <SearchableSelect
             name="program_type"
             defaultValue={defaultValues.program_type}
             options={filterOptions.programTypes}
-            placeholder="Program"
+            placeholder="Program Type"
           />
           <SearchableSelect
             name="field_of_study"
@@ -93,13 +98,13 @@ export default function ProgramsFilterForm({
         </div>
       </div>
 
-      <hr className="bg-[#7F7F7F]" />
+      <div className="border-t border-neutral-100" />
 
       <SubmitButton
         isPending={false}
         pendingText="Searching..."
-        defaultText="Search"
-        className="px-6 xl:w-max"
+        defaultText="Search Programs"
+        className="w-full"
       />
     </form>
   );
