@@ -1,7 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import { getAllCareerRoles } from "./careersData";
+import FadeIn from "@/components/motion/FadeIn";
 
 export const metadata: Metadata = {
   title: "Careers",
@@ -14,6 +16,29 @@ export default function CareersPage() {
 
   return (
     <main className="pt-14">
+      <section className="px-6 md:px-12 xl:px-20">
+        <div className="relative mx-auto h-64 max-w-[83.75rem] overflow-hidden rounded-2xl bg-primary shadow-xl md:h-[27.875rem]">
+          <Image
+            src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1340&h=446&fit=crop"
+            alt="Team collaboration and careers"
+            width={1340}
+            height={446}
+            className="h-full w-full rounded-2xl object-cover"
+            priority
+          />
+          <div className="absolute top-0 h-full w-full bg-gradient-to-t from-primary/80 via-primary/40 to-transparent" />
+
+          <FadeIn className="absolute top-1/2 left-1/2 w-full -translate-1/2 px-4 text-center">
+            <h1 className="mb-6 text-4xl font-semibold text-white md:text-6xl">
+              Careers
+            </h1>
+            <p className="text-white">
+              Join our mission to make international education accessible to every student
+            </p>
+          </FadeIn>
+        </div>
+      </section>
+
       <section className="mx-auto max-w-screen-2xl px-6 py-16 md:px-12 md:py-24 xl:px-20">
         <div className="max-w-3xl space-y-4">
           <p className="text-sm font-semibold text-primary-300 uppercase tracking-wide">

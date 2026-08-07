@@ -3,6 +3,7 @@ import { ServiceDetail } from "./types";
 // NOTE: All prices are placeholders. Actual prices will be fetched from the database
 export const servicesDetails: Record<string, ServiceDetail> = {
   "international-admissions": {
+    // Student in library studying
     title: "Admissions",
     price: 0, // price is determined by selected application option
     summary:
@@ -23,7 +24,7 @@ export const servicesDetails: Record<string, ServiceDetail> = {
       { name: "Applications to 2 Schools", price: 1, serviceCode: "IADM2" },
     ],
     image:
-      "https://res.cloudinary.com/dqeqlgygu/image/upload/v1754940941/gramel/public/services-page/services-page-banner_n2bauf.jpg",
+      "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=1340&h=446&fit=crop",
   },
   "document-verification": {
     title: "Document Verification",
@@ -37,7 +38,7 @@ export const servicesDetails: Record<string, ServiceDetail> = {
     ],
     serviceCode: "DOCV",
     image:
-      "https://res.cloudinary.com/dqeqlgygu/image/upload/v1754940941/gramel/public/services-page/services-page-banner_n2bauf.jpg",
+      "https://images.unsplash.com/photo-1554224311-beee415c15ac?w=1340&h=446&fit=crop",
   },
   scholarships: {
     title: "Scholarships",
@@ -51,7 +52,7 @@ export const servicesDetails: Record<string, ServiceDetail> = {
     ],
     serviceCode: "SCHL",
     image:
-      "https://res.cloudinary.com/dqeqlgygu/image/upload/v1754940941/gramel/public/services-page/services-page-banner_n2bauf.jpg",
+      "https://images.unsplash.com/photo-1532012197267-da84d127e765?w=1340&h=446&fit=crop",
   },
   "visa-assistance": {
     title: "Visa Assistance",
@@ -65,7 +66,7 @@ export const servicesDetails: Record<string, ServiceDetail> = {
     ],
     serviceCode: "VISA",
     image:
-      "https://res.cloudinary.com/dqeqlgygu/image/upload/v1754940941/gramel/public/services-page/services-page-banner_n2bauf.jpg",
+      "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1340&h=446&fit=crop",
   },
   "language-proficiency-tests": {
     title: "Language Proficiency Tests",
@@ -94,7 +95,7 @@ export const servicesDetails: Record<string, ServiceDetail> = {
       { name: "Pearson - PTE", price: 1, serviceCode: "PTE" },
     ],
     image:
-      "https://res.cloudinary.com/dqeqlgygu/image/upload/v1754940941/gramel/public/services-page/services-page-banner_n2bauf.jpg",
+      "https://images.unsplash.com/photo-1599667608036-e98edf8054ff?w=1340&h=446&fit=crop",
   },
   "advisory-services": {
     title: "Advisory Services",
@@ -108,6 +109,6 @@ export const servicesDetails: Record<string, ServiceDetail> = {
     ],
     serviceCode: "ADVS",
     image:
-      "https://res.cloudinary.com/dqeqlgygu/image/upload/v1754940941/gramel/public/services-page/services-page-banner_n2bauf.jpg",
+      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1340&h=446&fit=crop",
   },
 };
