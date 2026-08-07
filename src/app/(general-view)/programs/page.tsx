@@ -6,7 +6,10 @@ import ProgramsFilterForm, {
   ProgramsFilterValues,
 } from "@/components/forms/ProgramsFilterForm";
 import ExternalSchoolResults from "@/components/programpage/ExternalSchoolResults";
-import { searchExternalSchools } from "@/lib/externalSchoolSearch";
+import {
+  previewExternalSchools,
+  searchExternalSchools,
+} from "@/lib/externalSchoolSearch";
 import pool from "@/utils/db";
 import tryCatch from "@/utils/tryCatch";
 
@@ -168,11 +171,15 @@ export default async function ProgramsPage({
     field_of_study: params.field_of_study || undefined,
   };
 
+  const hasSchoolFilter = !!(filters.search || filters.country);
+
   const [filterOptions, { programs, total }, externalSchools] =
     await Promise.all([
       fetchFilterOptions(),
       fetchPrograms(filters),
-      searchExternalSchools(filters.search, filters.country),
+      hasSchoolFilter
+        ? searchExternalSchools(filters.search, filters.country)
+        : previewExternalSchools(),
     ]);
 
   return (
@@ -252,7 +259,10 @@ export default async function ProgramsPage({
               </div>
             )}
 
-            <ExternalSchoolResults schools={externalSchools} />
+            <ExternalSchoolResults
+              schools={externalSchools}
+              isPreview={!hasSchoolFilter}
+            />
           </div>
 
           {/* Filters */}

@@ -12,8 +12,12 @@ import type { ExternalSchool } from "@/lib/externalSchoolSearch";
 // just a pointer to book a consultation instead.
 export default function ExternalSchoolResults({
   schools,
+  isPreview = false,
 }: {
   schools: ExternalSchool[];
+  // True when this is showing an unprompted example set (no search or
+  // destination filter active yet) rather than results matching a query.
+  isPreview?: boolean;
 }) {
   if (schools.length === 0) return null;
 
@@ -21,12 +25,25 @@ export default function ExternalSchoolResults({
     <div className="mt-10 space-y-4 border-t border-[#e0e0e0] pt-10">
       <div>
         <h2 className="text-lg font-semibold text-black">
-          Other Schools Worldwide
+          {isPreview
+            ? "Explore More Schools Worldwide"
+            : "Other Schools Worldwide"}
         </h2>
         <p className="text-sm text-neutral-400">
-          Pulled live from public university directories -- not yet in our
-          curated program catalog, so we don&apos;t have confirmed tuition or
-          fees for these. Our team can still help you apply.
+          {isPreview ? (
+            <>
+              A live preview from public university directories, beyond our{" "}
+              <strong>curated program catalog</strong> above. Search by
+              school name or destination on the right to look up a specific
+              school.
+            </>
+          ) : (
+            <>
+              Pulled live from public university directories -- not yet in
+              our curated program catalog, so we don&apos;t have confirmed
+              tuition or fees for these. Our team can still help you apply.
+            </>
+          )}
         </p>
       </div>
 

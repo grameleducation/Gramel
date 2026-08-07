@@ -142,3 +142,20 @@ export async function searchExternalSchools(
 
   return Array.from(byName.values()).slice(0, RESULTS_PER_SOURCE);
 }
+
+// Countries shown as a preview on /programs when no search or destination
+// filter is active, so the live Hipolabs/Scorecard integration is visible
+// without requiring a visitor to already know to search an institution name.
+const PREVIEW_COUNTRIES = ["United States", "United Kingdom", "Canada"];
+const PREVIEW_PER_COUNTRY = 2;
+
+export async function previewExternalSchools(): Promise<ExternalSchool[]> {
+  const results = await Promise.all(
+    PREVIEW_COUNTRIES.map((country) => fetchHipolabsSchools(undefined, country)),
+  );
+
+  // Cap each country's contribution before flattening, so the preview is an
+  // actual mix across destinations rather than just the first country's
+  // results filling the whole slice.
+  return results.flatMap((schools) => schools.slice(0, PREVIEW_PER_COUNTRY));
+}

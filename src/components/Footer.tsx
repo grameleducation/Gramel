@@ -6,6 +6,7 @@ import gramel_education_logo from "../../public/gramel-education-logo.png";
 import Link from "next/link";
 import { Twitter } from "@/lib/icons";
 import client_env from "@/utils/env.client";
+import { openCookieSettings } from "@/lib/cookieConsent";
 
 // TODO: Fill dummy links
 export default function Footer() {
@@ -136,6 +137,15 @@ export default function Footer() {
               >
                 Cookie Policy
               </Link>
+            </li>
+            <li>
+              <button
+                type="button"
+                onClick={() => openCookieSettings()}
+                className="hover:text-neutral-500"
+              >
+                Cookie Settings
+              </button>
             </li>
           </ul>
         </div>

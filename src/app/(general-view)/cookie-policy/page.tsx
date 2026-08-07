@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import CookieSettingsButton from "@/components/CookieSettingsButton";
 
 export const metadata: Metadata = {
   title: "Cookie Policy",
@@ -32,6 +33,10 @@ export default function CookiePolicyPage() {
             .
           </p>
 
+          <div className="not-prose">
+            <CookieSettingsButton />
+          </div>
+
           <h2>1. What Are Cookies</h2>
           <p>
             Cookies are small text files placed on your device when you visit
@@ -45,13 +50,12 @@ export default function CookiePolicyPage() {
           <p>
             <strong>No.</strong> As of the date above, Gramel Education does
             not use analytics, advertising, or tracking cookies of our own,
-            and we do not run marketing pixels on the Platform. Every cookie
-            currently set on the Platform is either strictly necessary for it
-            to function or set by an embedded third-party tool that provides
-            a feature you&apos;ve chosen to use (like searching for a
-            program). If that changes in the future, we will update this
-            policy and, where required, ask for your consent before those
-            cookies are set.
+            and we do not run marketing pixels on the Platform. The only
+            cookies on the Platform are the strictly necessary ones needed
+            for it to function, and the functional ones set by our embedded
+            ApplyBoard tools -- both described below. If that changes in the
+            future, we will update this policy and, where required, ask for
+            your consent before those cookies are set.
           </p>
 
           <h2>3. Cookies We Use</h2>
@@ -87,9 +91,10 @@ export default function CookiePolicyPage() {
                 <td>
                   Set by the embedded ApplyBoard school search and
                   consultation booking tools on our homepage, to make those
-                  tools function correctly.
+                  tools function correctly. You can turn these off in Cookie
+                  Settings; the tools they power will be hidden if you do.
                 </td>
-                <td>Functional (third-party)</td>
+                <td>Functional (third-party) -- togglable</td>
               </tr>
               <tr>
                 <td>Paystack cookies</td>
@@ -110,17 +115,16 @@ export default function CookiePolicyPage() {
             </tbody>
           </table>
 
-          <h2>4. Why We Don&apos;t Offer a Cookie Toggle</h2>
+          <h2>4. Your Cookie Settings</h2>
           <p>
-            Because every cookie on the Platform today is either required for
-            core functionality (staying signed in, processing payment
-            securely, blocking spam) or set by a third-party tool you&apos;ve
-            actively chosen to use (searching for a program, booking a
-            consultation), there are currently no optional analytics or
-            marketing cookies for you to switch off. Our cookie notice is
-            therefore an acknowledgement of this policy rather than a
-            granular opt-in/opt-out control. You can still control cookies
-            directly through your browser settings, as described below.
+            Strictly necessary cookies can&apos;t be turned off -- the
+            Platform can&apos;t function without them. Functional cookies
+            (the ApplyBoard widgets) default to on, but you can turn them off
+            at any time using the button above or the &quot;Cookie
+            Settings&quot; link in the footer of any page. If you turn them
+            off, the homepage search tool and the consultation booking form
+            will show a notice instead of loading, since they depend on those
+            cookies to work. You can turn them back on the same way.
           </p>
 
           <h2>5. Managing Cookies in Your Browser</h2>
