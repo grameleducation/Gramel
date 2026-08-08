@@ -60,7 +60,7 @@ export default function NavSearch() {
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 z-[60] flex items-start justify-center bg-black/40 px-4 pt-24 backdrop-blur-sm">
+        <div className="fixed inset-0 z-[60] flex items-start justify-center bg-black/40 px-2 pt-16 backdrop-blur-sm sm:px-4 sm:pt-24">
           {/* backdrop */}
           <div
             className="absolute inset-0"
@@ -69,23 +69,23 @@ export default function NavSearch() {
           />
 
           {/* panel */}
-          <div className="relative w-full max-w-2xl rounded-2xl bg-white p-6 shadow-2xl sm:p-8">
-            <div className="mb-6 flex items-start justify-between gap-4">
+          <div className="relative w-full max-w-2xl rounded-2xl bg-white p-4 shadow-2xl sm:p-8">
+            <div className="mb-5 flex items-start justify-between gap-3 sm:mb-6">
               <div>
-                <h2 className="text-xl font-semibold text-primary">
+                <h2 className="text-lg font-semibold text-primary sm:text-xl">
                   Search Gramel
                 </h2>
-                <p className="mt-1 text-sm text-neutral-400">
-                  Find schools, programs, and scholarships in one place.
+                <p className="mt-0.5 text-xs text-neutral-400 sm:mt-1 sm:text-sm">
+                  Find schools, programs, and scholarships.
                 </p>
               </div>
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}
                 aria-label="Close search"
-                className="flex size-9 shrink-0 items-center justify-center rounded-full text-neutral-400 duration-300 hover:bg-neutral-100 hover:text-neutral-600"
+                className="flex size-8 shrink-0 items-center justify-center rounded-full text-neutral-400 duration-300 hover:bg-neutral-100 hover:text-neutral-600 sm:size-9"
               >
-                <X className="size-5" />
+                <X className="size-4 sm:size-5" />
               </button>
             </div>
 
