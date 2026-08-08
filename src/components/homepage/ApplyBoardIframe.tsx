@@ -8,7 +8,7 @@ import { useState } from "react";
 
 export default function ApplyBoardIframe() {
   const [height, setHeight] = useState("auto");
-  const isMobile = useIsMobile(361);
+  const isMobile = useIsMobile(768);
   const { functionalAllowed } = useCookieConsent();
 
   if (!functionalAllowed) {
@@ -33,9 +33,9 @@ export default function ApplyBoardIframe() {
     <iframe
       src={`https://www.applyboard.com/partners/${client_env.NEXT_PUBLIC_APPLYBOARD_PARTNER_ID}/intake-form`}
       title="Consultation Booking Form"
-      onLoad={() => setHeight(() => (isMobile ? "2370px" : "1980px"))}
+      onLoad={() => setHeight(() => (isMobile ? "1400px" : "1600px"))}
       style={{ height }}
-      className="w-full border-none"
+      className="w-full max-w-full border-none"
     />
   );
 }

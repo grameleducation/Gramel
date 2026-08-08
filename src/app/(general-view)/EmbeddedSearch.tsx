@@ -39,15 +39,17 @@ export default function EmbeddedSearch() {
   }
 
   return (
-    <div className="-mt-12.5 bg-[#F5F6F8]">
-      <div
-        id="ab-embedded-search"
-        data-host="https://www.applyboard.com"
-        data-rp-ref="44811"
-        data-orientation="vertical"
-        // data-default-countries="Canada,United Kingdom,Australia,Ireland"
-        data-default-countries=""
-      ></div>
+    <div className="-mt-12.5 overflow-x-hidden bg-[#F5F6F8]">
+      <div className="mx-auto max-w-screen-2xl px-6 md:px-12 xl:px-20">
+        <div
+          id="ab-embedded-search"
+          data-host="https://www.applyboard.com"
+          data-rp-ref="44811"
+          data-orientation="vertical"
+          // data-default-countries="Canada,United Kingdom,Australia,Ireland"
+          data-default-countries=""
+        ></div>
+      </div>
     </div>
   );
 }

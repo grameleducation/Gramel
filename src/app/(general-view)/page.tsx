@@ -91,7 +91,7 @@ export default async function HomePage() {
           <EmbeddedSearch />
         </FadeIn>
 
-        <FadeIn delay={0.2} className="mt-8 text-center">
+        <FadeIn delay={0.2} className="mt-8 mb-16 text-center">
           <Link
             href="/programs"
             prefetch={false}
@@ -134,7 +134,7 @@ export default async function HomePage() {
       {/* === BOOK A CONSULTATION === */}
       <section
         id="consultation-form"
-        className="mx-auto my-35 max-w-screen-2xl scroll-mt-24 px-6 md:px-12 xl:px-20"
+        className="mx-auto my-20 max-w-screen-2xl scroll-mt-24 px-4 sm:px-6 md:my-35 md:px-12 xl:px-20"
       >
         <FadeIn>
           <div className="mx-auto flex max-w-max items-center gap-3">
@@ -158,7 +158,7 @@ export default async function HomePage() {
         </FadeIn>
 
         <FadeIn delay={0.15}>
-          <div className="relative mx-auto mt-10 aspect-[21/9] w-full max-w-4xl overflow-hidden rounded-3xl shadow-xl">
+          <div className="relative mx-auto mt-8 aspect-video w-full max-w-4xl overflow-hidden rounded-2xl shadow-lg sm:mt-10 sm:aspect-[21/9] sm:rounded-3xl md:shadow-xl">
             <Image
               src="/consultation-student.jpg"
               alt="A student ready to start their study abroad journey"
@@ -170,7 +170,7 @@ export default async function HomePage() {
         </FadeIn>
 
         <FadeIn delay={0.25}>
-          <div className="mx-auto mt-10 max-w-4xl overflow-hidden rounded-3xl bg-[#f8f9fe] p-4 shadow-lg md:p-10">
+          <div className="mx-auto mt-8 max-w-4xl overflow-hidden rounded-2xl bg-[#f8f9fe] p-3 shadow-lg sm:mt-10 sm:rounded-3xl sm:p-4 md:p-10">
             <ApplyBoardIframe />
           </div>
         </FadeIn>
