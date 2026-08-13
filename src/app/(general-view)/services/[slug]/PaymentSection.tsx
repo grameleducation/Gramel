@@ -76,13 +76,17 @@ export default function PaymentSection({
       : undefined;
 
   return (
-    <aside className="flex flex-col items-center justify-center rounded-2xl bg-[#F2F5FF] p-6 shadow-md">
-      <h2 className="mb-4 text-center text-2xl font-bold text-primary">
+    <aside className="flex flex-col items-center justify-center rounded-3xl bg-gradient-to-br from-primary-300/10 to-primary/5 p-8 shadow-lg ring-1 ring-primary-300/20">
+      <div className="mb-2 inline-block rounded-full bg-primary-300/20 px-3 py-1">
+        <p className="text-xs font-semibold uppercase tracking-wider text-primary-300">
+          Quick Start
+        </p>
+      </div>
+      <h2 className="mb-3 text-center text-2xl font-bold text-primary">
         Ready to Get Started?
       </h2>
-      <p className="mb-6 text-center text-neutral-500">
-        Begin your journey with our {service.title} service. Secure your spot
-        now!
+      <p className="mb-8 text-center text-sm text-neutral-600">
+        Begin your {service.title} journey today. Secure your spot now!
       </p>
 
       {isLanguageTest && (
@@ -147,9 +151,10 @@ export default function PaymentSection({
         </div>
       )}
 
-      <div className="mb-4 w-full text-center">
-        <p className="text-sm font-semibold text-primary">
-          Amount to pay: ₦{numeral(selectedPrice / 100).format("0,0")}
+      <div className="mb-6 w-full rounded-2xl bg-white/60 px-4 py-4 text-center ring-1 ring-primary-300/30">
+        <p className="text-xs font-medium uppercase text-neutral-500">Total Amount</p>
+        <p className="mt-1 text-3xl font-bold text-primary">
+          ₦{numeral(selectedPrice / 100).format("0,0")}
         </p>
       </div>
 
@@ -158,8 +163,9 @@ export default function PaymentSection({
         onOpenChange={setIsPaymentDialogOpen}
       >
         <AlertDialogTrigger asChild>
-          <button className="flex w-full items-center justify-center rounded-xl bg-primary px-6 py-3 text-center text-lg font-semibold whitespace-nowrap text-white transition-colors duration-200 hover:bg-primary-300">
-            Make payment
+          <button className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-primary to-primary-300 px-6 py-4 text-center font-semibold text-white transition-all duration-300 hover:shadow-lg hover:shadow-primary/30">
+            <CreditCardIcon className="size-5" />
+            <span>Make Payment</span>
           </button>
         </AlertDialogTrigger>
         <AlertDialogContent

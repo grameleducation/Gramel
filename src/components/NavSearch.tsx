@@ -60,17 +60,18 @@ export default function NavSearch() {
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 z-[60] flex items-start justify-end bg-black/40 backdrop-blur-sm">
+        <div className="fixed inset-0 z-[60] overflow-hidden">
           {/* backdrop */}
           <div
-            className="absolute inset-0"
+            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
             onClick={() => setIsOpen(false)}
             aria-hidden="true"
           />
 
           {/* panel - slide in from right on mobile, centered on desktop */}
-          <div className="relative w-full max-w-md rounded-2xl bg-white p-4 shadow-2xl sm:max-w-2xl sm:rounded-l-2xl sm:rounded-r-none sm:p-8 sm:mr-0 md:m-auto md:max-w-2xl md:rounded-2xl md:ml-0">
-            <div className="mb-5 flex items-start justify-between gap-3 sm:mb-6">
+          <div className="absolute inset-y-0 right-0 top-0 flex h-full w-full max-w-sm items-start justify-end pt-16 md:inset-0 md:flex md:items-start md:justify-center md:max-w-2xl md:right-auto md:w-auto md:pt-24">
+            <div className="relative w-full max-w-sm rounded-l-2xl bg-white p-4 shadow-2xl md:max-w-2xl md:rounded-2xl md:p-8 sm:p-6">
+              <div className="mb-5 flex items-start justify-between gap-3 sm:mb-6">
               <div>
                 <h2 className="text-lg font-semibold text-primary sm:text-xl">
                   Search Gramel
@@ -154,6 +155,7 @@ export default function NavSearch() {
                 Search {tab === "programs" ? "Programs" : "Scholarships"}
               </button>
             </form>
+            </div>
           </div>
         </div>
       )}

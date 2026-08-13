@@ -127,39 +127,48 @@ export default async function ServiceDetailPage({
   };
 
   return (
-    <main className="">
+    <main className="bg-gradient-to-b from-white to-neutral-50">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
       />
       <div className="mx-auto max-w-screen-2xl px-6 pt-12 md:px-12 xl:px-20">
         {service.image && (
-          <Image
-            src={service.image}
-            alt={service.title}
-            width={1340}
-            height={446}
-            className="mb-8 h-64 w-full rounded-2xl object-cover md:h-80"
-            priority
-          />
+          <div className="mb-12 overflow-hidden rounded-3xl shadow-lg">
+            <Image
+              src={service.image}
+              alt={service.title}
+              width={1340}
+              height={446}
+              className="h-64 w-full object-cover transition-transform duration-300 hover:scale-105 md:h-96"
+              priority
+            />
+          </div>
         )}
-        <div className="mt-28 grid gap-10 lg:grid-cols-[2fr_1fr] xl:grid-cols-[3fr_1fr]">
+        <div className="grid gap-12 lg:grid-cols-[2fr_1fr] xl:grid-cols-[3fr_1.2fr]">
           {/* Service Details */}
           <section>
-            <h1 className="mb-4 text-3xl font-bold text-primary lg:text-5xl">
-              {service.title}
-            </h1>
-            <p className="mb-8 text-neutral-300 lg:text-lg">
-              {service.summary}
-            </p>
-            <div className="prose prose-lg max-w-none text-[#1e1e1e]">
+            <div className="mb-8">
+              <p className="mb-2 inline-block rounded-full bg-primary-300/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary-300">
+                {service.serviceCode}
+              </p>
+              <h1 className="mb-4 text-4xl font-bold text-primary lg:text-5xl">
+                {service.title}
+              </h1>
+              <p className="text-lg text-neutral-600 lg:text-xl">
+                {service.summary}
+              </p>
+            </div>
+            <div className="space-y-6 text-neutral-700">
               {service.details.map((detail, i) =>
                 service.serviceCode === "LANG" && i === 2 ? (
-                  <div key={i} dangerouslySetInnerHTML={{ __html: detail }} />
+                  <div key={i} className="prose prose-sm max-w-none lg:prose-base" dangerouslySetInnerHTML={{ __html: detail }} />
                 ) : service.serviceCode === "IADM" && i === 3 ? (
-                  <div key={i} dangerouslySetInnerHTML={{ __html: detail }} />
+                  <div key={i} className="prose prose-sm max-w-none lg:prose-base" dangerouslySetInnerHTML={{ __html: detail }} />
                 ) : (
-                  <p key={i}>{detail}</p>
+                  <p key={i} className="leading-relaxed">
+                    {detail}
+                  </p>
                 ),
               )}
             </div>
@@ -168,7 +177,7 @@ export default async function ServiceDetailPage({
           {/* CTA Payment Section */}
           <PaymentSection service={service} slug={slug} />
         </div>
-        <hr className="mt-24 border-t border-[#7f7f7f]" />
+        <div className="mt-20 border-t border-neutral-200" />
       </div>
     </main>
   );
