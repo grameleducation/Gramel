@@ -24,7 +24,7 @@ export const servicesDetails: Record<string, ServiceDetail> = {
       { name: "Applications to 2 Schools", price: 1, serviceCode: "IADM2" },
     ],
     image:
-      "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=1340&h=446&fit=crop",
+      "https://res.cloudinary.com/qz1sg0lt/image/upload/v1722694200/gramel/services/admissions_bg_cz1p8k.jpg",
   },
   "document-verification": {
     title: "Document Verification",
@@ -38,7 +38,7 @@ export const servicesDetails: Record<string, ServiceDetail> = {
     ],
     serviceCode: "DOCV",
     image:
-      "https://images.unsplash.com/photo-1554224311-beee415c15ac?w=1340&h=446&fit=crop",
+      "https://res.cloudinary.com/qz1sg0lt/image/upload/v1722694200/gramel/services/documents_bg_a4k2m9.jpg",
   },
   scholarships: {
     title: "Scholarships",
@@ -52,7 +52,7 @@ export const servicesDetails: Record<string, ServiceDetail> = {
     ],
     serviceCode: "SCHL",
     image:
-      "https://images.unsplash.com/photo-1532012197267-da84d127e765?w=1340&h=446&fit=crop",
+      "https://res.cloudinary.com/qz1sg0lt/image/upload/v1722694200/gramel/services/scholarships_bg_j7f3x2.jpg",
   },
   "visa-assistance": {
     title: "Visa Assistance",
@@ -66,7 +66,7 @@ export const servicesDetails: Record<string, ServiceDetail> = {
     ],
     serviceCode: "VISA",
     image:
-      "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1340&h=446&fit=crop",
+      "https://res.cloudinary.com/qz1sg0lt/image/upload/v1722694200/gramel/services/visa_bg_m2k9p5.jpg",
   },
   "language-proficiency-tests": {
     title: "Language Proficiency Tests",
@@ -95,7 +95,7 @@ export const servicesDetails: Record<string, ServiceDetail> = {
       { name: "Pearson - PTE", price: 1, serviceCode: "PTE" },
     ],
     image:
-      "https://images.unsplash.com/photo-1599667608036-e98edf8054ff?w=1340&h=446&fit=crop",
+      "https://res.cloudinary.com/qz1sg0lt/image/upload/v1722694200/gramel/services/language_tests_bg_n3m8q1.jpg",
   },
   "advisory-services": {
     title: "Advisory Services",
@@ -109,6 +109,6 @@ export const servicesDetails: Record<string, ServiceDetail> = {
     ],
     serviceCode: "ADVS",
     image:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1340&h=446&fit=crop",
+      "https://res.cloudinary.com/qz1sg0lt/image/upload/v1722694200/gramel/services/advisory_bg_k5l7n2.jpg",
   },
 };
