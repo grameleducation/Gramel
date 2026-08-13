@@ -60,7 +60,7 @@ export default function NavSearch() {
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 z-[60] flex items-start justify-center bg-black/40 px-2 pt-16 backdrop-blur-sm sm:px-4 sm:pt-24">
+        <div className="fixed inset-0 z-[60] flex items-start justify-end bg-black/40 backdrop-blur-sm">
           {/* backdrop */}
           <div
             className="absolute inset-0"
@@ -68,8 +68,8 @@ export default function NavSearch() {
             aria-hidden="true"
           />
 
-          {/* panel */}
-          <div className="relative w-full max-w-2xl rounded-2xl bg-white p-4 shadow-2xl sm:p-8">
+          {/* panel - slide in from right on mobile, centered on desktop */}
+          <div className="relative w-full max-w-md rounded-2xl bg-white p-4 shadow-2xl sm:max-w-2xl sm:rounded-l-2xl sm:rounded-r-none sm:p-8 sm:mr-0 md:m-auto md:max-w-2xl md:rounded-2xl md:ml-0">
             <div className="mb-5 flex items-start justify-between gap-3 sm:mb-6">
               <div>
                 <h2 className="text-lg font-semibold text-primary sm:text-xl">
