@@ -138,7 +138,8 @@ export default function Navbar() {
                 </li>
               );
             }
-            const href = link.href === "/assist" ? assistHref : toHref(link.href);
+            const href =
+              link.href === "/assist" ? assistHref : toHref(link.href);
             return (
               <li key={index}>
                 <Link
@@ -153,95 +154,102 @@ export default function Navbar() {
           })}
         </ul>
 
-        {/* search */}
-        <NavSearch />
+        {/* actions: search, desktop login, mobile menu toggle -- grouped so
+            justify-between on the row above doesn't spread them apart when
+            the desktop login button is hidden on mobile */}
+        <div className="flex items-center gap-2 md:gap-4">
+          {/* search */}
+          <NavSearch />
 
-        {/* desktop login button */}
-        {isUserLoading ? (
-          <button className="hidden animate-pulse rounded-2xl bg-gray-400 px-6 py-3 text-gray-400 opacity-50 md:inline-block">
-            Log Out {/* Not visible. Just to retain button size */}
-          </button>
-        ) : !user ? (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button className="hidden items-center gap-2 rounded-2xl border-transparent bg-primary px-6 py-3 text-white duration-300 hover:bg-primary-300 md:flex">
-                Log In <ChevronDown className="text-2xl" />
-              </button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="bg-primary-300">
-              <DropdownMenuItem asChild>
-                <Link
-                  prefetch={false}
-                  href={toHref("/login")}
-                  className="rounded-2xl px-6 py-3 font-semibold text-white duration-300 hover:text-primary"
-                >
-                  Log In
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link
-                  prefetch={false}
-                  href={toHref("/signup")}
-                  className="rounded-2xl px-6 py-3 font-semibold text-white duration-300 hover:text-primary"
-                >
-                  Create Account
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        ) : (
-          <div className="flex items-center gap-2">
-            {/* Student Profile Link */}
-            <RequirePermission
-              action={UserActions.view_student_profile}
-              role={user.role}
-            >
-              <Link
-                prefetch={false}
-                href={toHref("/student-profile")}
-                className="hidden rounded-2xl border-2 border-primary bg-transparent px-4 py-1.5 text-sm font-semibold text-primary duration-300 hover:border-primary-300 hover:bg-primary-300 hover:text-white md:inline-block lg:px-6 lg:text-base"
-              >
-                Profile
-              </Link>
-            </RequirePermission>
-
-            {/* Admin Dashboard Link */}
-            <RequirePermission
-              action={UserActions.view_admin_dashboard}
-              role={user.role}
-            >
-              <Link
-                prefetch={false}
-                href={toHref("/dashboard")}
-                className="hidden rounded-2xl border-2 border-primary bg-transparent px-4 py-1.5 text-sm font-semibold text-primary duration-300 hover:border-primary-300 hover:bg-primary-300 hover:text-white md:inline-block lg:px-6 lg:text-base"
-              >
-                Dashboard
-              </Link>
-            </RequirePermission>
-
-            {/* Logout Button */}
-            <button
-              onClick={handleLogout}
-              disabled={isLoggingOut}
-              className="group relative hidden cursor-pointer items-center justify-center gap-2 rounded-2xl border-2 border-red-500 px-6 py-1.5 text-sm font-semibold text-red-500 duration-300 hover:bg-red-500 hover:text-white disabled:cursor-not-allowed disabled:opacity-90 md:flex lg:text-base"
-            >
-              <LoaderCircle className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-spin opacity-0 duration-300 group-disabled:opacity-100" />
-              <span
-                className={"opacity-100 duration-300 group-disabled:opacity-0"}
-              >
-                Log Out
-              </span>
+          {/* desktop login button */}
+          {isUserLoading ? (
+            <button className="hidden animate-pulse rounded-2xl bg-gray-400 px-6 py-3 text-gray-400 opacity-50 md:inline-block">
+              Log Out {/* Not visible. Just to retain button size */}
             </button>
-          </div>
-        )}
+          ) : !user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className="hidden items-center gap-2 rounded-2xl border-transparent bg-primary px-6 py-3 text-white duration-300 hover:bg-primary-300 md:flex">
+                  Log In <ChevronDown className="text-2xl" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="bg-primary-300">
+                <DropdownMenuItem asChild>
+                  <Link
+                    prefetch={false}
+                    href={toHref("/login")}
+                    className="rounded-2xl px-6 py-3 font-semibold text-white duration-300 hover:text-primary"
+                  >
+                    Log In
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link
+                    prefetch={false}
+                    href={toHref("/signup")}
+                    className="rounded-2xl px-6 py-3 font-semibold text-white duration-300 hover:text-primary"
+                  >
+                    Create Account
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <div className="flex items-center gap-2">
+              {/* Student Profile Link */}
+              <RequirePermission
+                action={UserActions.view_student_profile}
+                role={user.role}
+              >
+                <Link
+                  prefetch={false}
+                  href={toHref("/student-profile")}
+                  className="hidden rounded-2xl border-2 border-primary bg-transparent px-4 py-1.5 text-sm font-semibold text-primary duration-300 hover:border-primary-300 hover:bg-primary-300 hover:text-white md:inline-block lg:px-6 lg:text-base"
+                >
+                  Profile
+                </Link>
+              </RequirePermission>
 
-        {/* menu toggle button */}
-        <button
-          onClick={toggleMenu}
-          className="text-neutral-500 hover:text-neutral-300 md:hidden"
-        >
-          {isOpen ? <X className="size-6" /> : <Menu className="size-6" />}
-        </button>
+              {/* Admin Dashboard Link */}
+              <RequirePermission
+                action={UserActions.view_admin_dashboard}
+                role={user.role}
+              >
+                <Link
+                  prefetch={false}
+                  href={toHref("/dashboard")}
+                  className="hidden rounded-2xl border-2 border-primary bg-transparent px-4 py-1.5 text-sm font-semibold text-primary duration-300 hover:border-primary-300 hover:bg-primary-300 hover:text-white md:inline-block lg:px-6 lg:text-base"
+                >
+                  Dashboard
+                </Link>
+              </RequirePermission>
+
+              {/* Logout Button */}
+              <button
+                onClick={handleLogout}
+                disabled={isLoggingOut}
+                className="group relative hidden cursor-pointer items-center justify-center gap-2 rounded-2xl border-2 border-red-500 px-6 py-1.5 text-sm font-semibold text-red-500 duration-300 hover:bg-red-500 hover:text-white disabled:cursor-not-allowed disabled:opacity-90 md:flex lg:text-base"
+              >
+                <LoaderCircle className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-spin opacity-0 duration-300 group-disabled:opacity-100" />
+                <span
+                  className={
+                    "opacity-100 duration-300 group-disabled:opacity-0"
+                  }
+                >
+                  Log Out
+                </span>
+              </button>
+            </div>
+          )}
+
+          {/* menu toggle button */}
+          <button
+            onClick={toggleMenu}
+            className="text-neutral-500 hover:text-neutral-300 md:hidden"
+          >
+            {isOpen ? <X className="size-6" /> : <Menu className="size-6" />}
+          </button>
+        </div>
 
         {/* mobile nav menu */}
         <div
@@ -274,7 +282,9 @@ export default function Navbar() {
                 <li key={index}>
                   <Link
                     prefetch={false}
-                    href={link.href === "/assist" ? assistHref : toHref(link.href)}
+                    href={
+                      link.href === "/assist" ? assistHref : toHref(link.href)
+                    }
                     className="block duration-300 hover:text-neutral-300"
                     onClick={toggleMenu}
                   >
@@ -293,11 +303,7 @@ export default function Navbar() {
   );
 }
 
-function MobileScreenLoginDropDown({
-  toggleMenu,
-}: {
-  toggleMenu: () => void;
-}) {
+function MobileScreenLoginDropDown({ toggleMenu }: { toggleMenu: () => void }) {
   const triggerRef = useRef<HTMLButtonElement>(null);
   const [triggerWidth, setTriggerWidth] = useState<number | null>(null);
   const { user, isUserLoading, isLoggingOut, handleLogout } = useAuthContext();

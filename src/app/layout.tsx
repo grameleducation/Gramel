@@ -84,7 +84,11 @@ const organizationJsonLd = {
     "@type": "Country",
     name: "Nigeria",
   },
-  sameAs: [],
+  sameAs: [
+    "https://web.facebook.com/PointOneTravels/",
+    "https://instagram.com/grameleducation",
+    "https://www.linkedin.com/company/grameleducation",
+  ],
 };
 
 export default function RootLayout({

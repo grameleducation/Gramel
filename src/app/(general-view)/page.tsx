@@ -151,8 +151,8 @@ export default async function HomePage() {
 
             <p className="mx-auto max-w-[58rem] text-center text-neutral-300 lg:text-lg">
               Tell us about your goals and one of our education advisors will
-              reach out to help you find the right program, funding, and
-              pathway abroad.
+              reach out to help you find the right program, funding, and pathway
+              abroad.
             </p>
           </div>
         </FadeIn>
@@ -176,21 +176,24 @@ export default async function HomePage() {
         </FadeIn>
       </section>
 
-
       {/* === SCHOLARSHIPS & FUNDING TEASER === */}
       <section className="mx-auto max-w-screen-2xl px-6 md:px-12 xl:px-20">
         <FadeIn>
           <div className="mx-auto flex flex-col items-center gap-6 rounded-3xl bg-gradient-to-r from-primary-300 to-primary p-10 text-center text-white md:p-16">
             <div className="flex items-center gap-3">
-              <Image src={gramel_white_icon} alt="Gramel Icon" className="h-6" />
+              <Image
+                src={gramel_white_icon}
+                alt="Gramel Icon"
+                className="h-6"
+              />
               <p className="text-lg leading-normal">SCHOLARSHIPS & FUNDING</p>
             </div>
             <h2 className="max-w-xl text-4xl leading-tight font-bold lg:text-5xl">
               Find Scholarships and Funding Opportunities
             </h2>
             <p className="max-w-2xl text-[#E6E6EB] lg:text-lg">
-              Explore merit-based, need-based, and regional scholarships to
-              make your study abroad journey more affordable.
+              Explore merit-based, need-based, and regional scholarships to make
+              your study abroad journey more affordable.
             </p>
             <Link
               href="/scholarships"
@@ -237,7 +240,10 @@ export default async function HomePage() {
         {/* grid container */}
         <div className="mt-16 grid gap-12 md:grid-cols-2">
           {/* image container */}
-          <FadeIn direction="left" className="rounded-3xl bg-[#8EC3FB] p-10 shadow-xl">
+          <FadeIn
+            direction="left"
+            className="rounded-3xl bg-[#8EC3FB] p-10 shadow-xl"
+          >
             <Image
               src="https://res.cloudinary.com/dqeqlgygu/image/upload/v1754977281/gramel/public/home/stacked-books_slg2uy.jpg"
               className="h-full w-full rounded-xl object-cover"
@@ -289,8 +295,14 @@ export default async function HomePage() {
           {/* our services heading */}
           <FadeIn>
             <div className="mx-auto flex max-w-max items-center gap-3">
-              <Image src={gramel_white_icon} alt="Gramel Icon" className="h-6" />
-              <p className="text-lg leading-normal text-primary-300">ABOUT US</p>
+              <Image
+                src={gramel_white_icon}
+                alt="Gramel Icon"
+                className="h-6"
+              />
+              <p className="text-lg leading-normal text-primary-300">
+                ABOUT US
+              </p>
             </div>
 
             <div className="mt-4 space-y-6">
@@ -300,26 +312,43 @@ export default async function HomePage() {
 
               <p className="mx-auto max-w-[58rem] text-center text-[#E6E6EB] lg:text-lg">
                 Gramel Education is a full-service education management company
-                committed to helping students achieve their international academic
-                dreams with clarity, confidence, and the right support at every
-                step. Founded on the belief that quality education should be
-                accessible to everyone, we provide personalized guidance,
-                application support, and financial solutions to help students
-                successfully gain admission into top schools around the world.
+                committed to helping students achieve their international
+                academic dreams with clarity, confidence, and the right support
+                at every step. Founded on the belief that quality education
+                should be accessible to everyone, we provide personalized
+                guidance, application support, and financial solutions to help
+                students successfully gain admission into top schools around the
+                world.
               </p>
             </div>
           </FadeIn>
 
-          <FadeIn delay={0.15} className="mt-16 space-y-12">
-            <Image
-              src="https://res.cloudinary.com/dqeqlgygu/image/upload/v1754977282/gramel/public/home/about-us-video-poster_jqsybp.jpg"
-              alt="a smiling female student"
+          <FadeIn delay={0.15} className="mt-16 space-y-3">
+            <video
+              src="/videos/about-us-graduate.mp4"
+              poster="https://res.cloudinary.com/dqeqlgygu/image/upload/v1754977282/gramel/public/home/about-us-video-poster_jqsybp.jpg"
               className="h-auto w-full rounded-4xl shadow-2xl"
-              width={1280}
-              height={600}
+              autoPlay
+              muted
+              loop
+              playsInline
+              aria-label="A young graduate smiling and holding up her diploma outside her university"
             />
+            <p className="text-right text-xs text-white/50">
+              Video via{" "}
+              <a
+                href="https://www.magnific.com/free-video/portrait-african-american-happy-young-graduated-woman-posing-camera-showing-her-diploma-making-yes-gesture-front-university_478797"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-white/80"
+              >
+                Magnific
+              </a>
+            </p>
 
-            <AboutUsStats />
+            <div className="pt-9">
+              <AboutUsStats />
+            </div>
           </FadeIn>
         </div>
       </section>
@@ -340,11 +369,11 @@ export default async function HomePage() {
             </h2>
 
             <p className="mx-auto max-w-[58rem] text-center text-neutral-300 lg:text-lg">
-              We work hand-in-hand with top universities, colleges, and education
-              platforms around the world to give students access to high-quality
-              programs, faster application processing, and more funding
-              opportunities. When you choose Gramel Education, you benefit from
-              partnerships built on trust and proven results.
+              We work hand-in-hand with top universities, colleges, and
+              education platforms around the world to give students access to
+              high-quality programs, faster application processing, and more
+              funding opportunities. When you choose Gramel Education, you
+              benefit from partnerships built on trust and proven results.
             </p>
           </div>
         </FadeIn>
@@ -369,10 +398,10 @@ export default async function HomePage() {
 
             <p className="mx-auto max-w-[58rem] text-center text-neutral-300 lg:text-lg">
               At Gramel Education, we measure our success through the students
-              we&apos;ve helped achieve theirs. Whether it&apos;s getting admitted
-              to top schools, securing scholarships, or arriving safely abroad,
-              our students trust us to guide them through the entire journey and
-              we deliver. Here&apos;s what a few of them had to say:
+              we&apos;ve helped achieve theirs. Whether it&apos;s getting
+              admitted to top schools, securing scholarships, or arriving safely
+              abroad, our students trust us to guide them through the entire
+              journey and we deliver. Here&apos;s what a few of them had to say:
             </p>
           </div>
         </FadeIn>

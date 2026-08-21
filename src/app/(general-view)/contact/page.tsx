@@ -1,6 +1,6 @@
 import CTASection from "@/components/CTASection";
 import ContactForm from "@/components/forms/ContactForm";
-import { FacebookLogo, InstagramSolid, Linkedin, Twitter } from "@/lib/icons";
+import { FacebookLogo, InstagramSolid, Linkedin } from "@/lib/icons";
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -78,31 +78,32 @@ export default function ContactPage() {
                 <h4 className="text-lg font-bold text-[#62A9DC] xs:text-2xl">
                   Social Network
                 </h4>
-                {/* TODO: Activate social network links */}
                 <div className="flex items-center gap-4 text-xl text-black">
                   <Link
-                    href="#"
+                    href="https://instagram.com/grameleducation"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Gramel Education on Instagram"
                     className="duration-300 hover:text-neutral-300"
                     prefetch={false}
                   >
                     <InstagramSolid />
                   </Link>
                   <Link
-                    href="#"
-                    className="duration-300 hover:text-neutral-300"
-                    prefetch={false}
-                  >
-                    <Twitter />
-                  </Link>
-                  <Link
-                    href="#"
+                    href="https://web.facebook.com/PointOneTravels/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Gramel Education on Facebook"
                     className="duration-300 hover:text-neutral-300"
                     prefetch={false}
                   >
                     <FacebookLogo />
                   </Link>
                   <Link
-                    href="#"
+                    href="https://www.linkedin.com/company/grameleducation"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Gramel Education on LinkedIn"
                     className="duration-300 hover:text-neutral-300"
                     prefetch={false}
                   >

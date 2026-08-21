@@ -1,5 +1,6 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 // Navbar/Footer detect the assist subdomain themselves (client-side, via
 // window.location) rather than this layout reading headers() -- that dynamic
@@ -16,6 +17,7 @@ export default function GeneralViewLayout({
       <Navbar />
       {children}
       <Footer />
+      <WhatsAppButton />
     </>
   );
 }
