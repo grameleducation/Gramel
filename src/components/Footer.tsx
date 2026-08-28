@@ -33,8 +33,7 @@ export default function Footer() {
               <Image src={gramel_education_logo} alt="Gramel Education Logo" />
             </Link>
             <p className="max-w-56 text-sm text-neutral-300">
-              Study abroad agency based in 50, Ebitu Ukiwe Street, Jabi, Abuja,
-              Nigeria.
+              50, Ebitu Ukiwe Street, Jabi, Abuja, Nigeria.
             </p>
           </div>
 
@@ -156,8 +155,18 @@ export default function Footer() {
             reserved.
           </p>
 
-          {/* Social Icons */}
+          {/* Social Icons and Chat */}
           <div className="flex gap-3">
+            {/* Chat with us button */}
+            <Link
+              href={toHref("/contact")}
+              aria-label="Chat with us"
+              className="flex size-12 items-center justify-center rounded-full bg-primary text-sm font-semibold text-white hover:bg-primary-300 duration-300"
+              prefetch={false}
+            >
+              Chat
+            </Link>
+
             {/* Instagram Icon */}
             <Link
               href="https://instagram.com/grameleducation"
