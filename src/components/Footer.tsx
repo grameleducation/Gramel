@@ -28,7 +28,7 @@ export default function Footer() {
     <footer className="bg-white pt-20 pb-6">
       <div className="mx-auto max-w-screen-2xl px-6 md:px-12 xl:px-20">
         <div className="grid grid-cols-[auto] justify-center gap-y-8 text-center text-neutral-300 sm:grid-cols-2 sm:text-left md:grid-cols-[auto_auto_auto_auto] md:justify-between md:gap-0">
-          <div className="space-y-3">
+          <div className="space-y-6">
             <Link prefetch={false} href={toHref("/")}>
               <Image src={gramel_education_logo} alt="Gramel Education Logo" />
             </Link>
